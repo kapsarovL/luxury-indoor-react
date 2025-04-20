@@ -203,3 +203,5 @@ This project is licensed under the [MIT License]. See the (LICENSE) file for det
 ---
 
 Thank you for checking out the Luxury Indoor React Application! We hope you find it useful and look forward to your contributions. If you have any questions or feedback, please feel free to open an issue or contact us.
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/ad51f3fa-ae9f-45f4-930e-c24c9ef06b20/deploy-status)](https://app.netlify.com/sites/luxury-indoor-estate/deploys)
