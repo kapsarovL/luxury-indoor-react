@@ -5,13 +5,12 @@ Welcome to the Luxury Indoor React Application! This project is a high-end real 
 ## Table of Contents
 
 - Overview
-- [Features]
-  (#Features)
+- [Features](#features)
 - [Project Structure](#project-structure)
-- Installation
-- Usage
-- Contributing
-- License
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## Overview
 
