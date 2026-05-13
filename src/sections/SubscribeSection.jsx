@@ -6,9 +6,11 @@ const SubscribeSection = () => {
   const [email, setEmail] = useState('');
   const [localError, setLocalError] = useState(null);
   const [success, setSuccess] = useState(false);
-  const { subscribe, loading, error: contextError } = useContext(
-    SubscriptionContext
-  );
+  const {
+    subscribe,
+    loading,
+    error: contextError,
+  } = useContext(SubscriptionContext);
 
   const handleSubscribe = async (e) => {
     e.preventDefault();

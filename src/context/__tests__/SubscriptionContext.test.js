@@ -1,5 +1,8 @@
-import { renderHook, act, waitFor } from '@testing-library/react';
-import { SubscriptionProvider, SubscriptionContext } from '../SubscriptionContext';
+import { renderHook, act } from '@testing-library/react';
+import {
+  SubscriptionProvider,
+  SubscriptionContext,
+} from '../SubscriptionContext';
 import * as database from '../../db/database';
 
 jest.mock('../../db/database');
@@ -24,9 +27,7 @@ describe('SubscriptionContext', () => {
     database.getSubscriptionByEmail.mockResolvedValue(null);
     database.subscribeEmail.mockResolvedValue(mockSubscription);
 
-    const { result } = renderHook(() => SubscriptionContext, { wrapper });
-
-    const contextValue = result.current;
+    renderHook(() => SubscriptionContext, { wrapper });
 
     act(() => {
       // The hook needs to be called differently

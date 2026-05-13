@@ -86,7 +86,9 @@ describe('PropertiesSection', () => {
     });
 
     const locationSelect = screen.getByDisplayValue('All Locations');
-    fireEvent.change(locationSelect, { target: { value: 'Beverly Hills, CA' } });
+    fireEvent.change(locationSelect, {
+      target: { value: 'Beverly Hills, CA' },
+    });
 
     expect(screen.getByText('Modern Glass Villa')).toBeInTheDocument();
     expect(screen.queryByText('Luxury Apartment')).not.toBeInTheDocument();

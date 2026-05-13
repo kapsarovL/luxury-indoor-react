@@ -133,13 +133,12 @@ describe('neonService', () => {
         json: async () => mockResponse,
       });
 
-      const result = await neonService.getSubscriptionByEmail('test@example.com');
+      const result =
+        await neonService.getSubscriptionByEmail('test@example.com');
 
       expect(result).toEqual(mockResponse);
       expect(global.fetch).toHaveBeenCalledWith(
-        expect.stringContaining(
-          '/api/subscriptions/email/test%40example.com'
-        )
+        expect.stringContaining('/api/subscriptions/email/test%40example.com')
       );
     });
 
@@ -155,9 +154,7 @@ describe('neonService', () => {
 
       expect(result).toEqual(mockResponse);
       expect(global.fetch).toHaveBeenCalledWith(
-        expect.stringContaining(
-          '/api/subscriptions/email/test%40example.com'
-        ),
+        expect.stringContaining('/api/subscriptions/email/test%40example.com'),
         expect.objectContaining({ method: 'DELETE' })
       );
     });
