@@ -15,6 +15,7 @@ export default {
     ],
   },
   testMatch: ['**/__tests__/**/*.test.js', '**/?(*.)+(spec|test).js'],
+  testPathIgnorePatterns: ['/server/'],
   collectCoverageFrom: [
     'src/**/*.{js,jsx}',
     '!src/**/*.test.js',

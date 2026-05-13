@@ -222,7 +222,7 @@ describe('Authentication API', () => {
         password: 'password123',
       });
 
-      const [, , args] = mockPool.query.mock.calls[0];
+      const [, args] = mockPool.query.mock.calls[0];
       const hashedPassword = args[2];
 
       expect(hashedPassword).not.toBe('password123');

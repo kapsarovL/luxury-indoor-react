@@ -11,8 +11,9 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "preview": "vite preview",
-    "test": "jest",
+    "test": "jest && jest --config jest.config.server.js",
     "test:watch": "jest --watch",
+    "test:server": "jest --config jest.config.server.js",
     "test:coverage": "jest --coverage"
   },
   "dependencies": {
