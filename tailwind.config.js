@@ -1,5 +1,4 @@
 /** @type {import('tailwindcss').Config} */
-import { warning } from 'framer-motion';
 import defaultTheme from 'tailwindcss/defaultTheme';
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
@@ -199,8 +198,6 @@ export default {
           900: 'hsl(236, 49%, 34%)',
           950: 'hsl(236, 49%, 24%)',
         },
-
-     
       },
       fontFamily: {
         sans: ['Nunito', 'sans-serif'],

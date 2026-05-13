@@ -1,21 +1,19 @@
-import {
-  gym,
-  swimmingPool as swimmingPool,
-  garden,
-  homeTheater,
-  villa1,
-  villa5,
-  villa3,
-  villa6,
-  villa2,
-  villa4,
-  apartment1,
-  apartment2,
-  apartment3,
-  apartment4,
-  apartment5,
-  apartment6,
-} from '/src/assets/images/index.js';
+const gym = '/src/assets/images/gym.webp';
+const swimmingPool = '/src/assets/images/swimmingPool.webp';
+const garden = '/src/assets/images/garden.webp';
+const homeTheater = '/src/assets/images/homeTheater.webp';
+const villa1 = '/src/assets/images/villa1.webp';
+const villa2 = '/src/assets/images/villa2.webp';
+const villa3 = '/src/assets/images/villa3.webp';
+const villa4 = '/src/assets/images/villa4.webp';
+const villa5 = '/src/assets/images/villa5.webp';
+const villa6 = '/src/assets/images/villa6.webp';
+const apartment1 = '/src/assets/images/apartment1.webp';
+const apartment2 = '/src/assets/images/apartment2.webp';
+const apartment3 = '/src/assets/images/apartment3.webp';
+const apartment4 = '/src/assets/images/apartment4.webp';
+const apartment5 = '/src/assets/images/apartment5.webp';
+const apartment6 = '/src/assets/images/apartment6.webp';
 
 export const properties = [
   // Villas

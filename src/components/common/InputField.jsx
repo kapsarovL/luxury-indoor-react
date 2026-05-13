@@ -1,8 +1,10 @@
+import PropTypes from 'prop-types';
+
 const InputField = ({
   label,
   type,
   id,
-  placeholder = "Enter your email address",
+  placeholder = 'Enter your email address',
   value,
   onChange,
 }) => {
@@ -24,6 +26,15 @@ const InputField = ({
       />
     </div>
   );
+};
+
+InputField.propTypes = {
+  label: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  placeholder: PropTypes.string,
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
 
 export default InputField;

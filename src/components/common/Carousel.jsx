@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import Slider from 'react-slick';
 
 const Carousel = ({ images }) => {
@@ -7,7 +8,6 @@ const Carousel = ({ images }) => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    ...settings,
   };
 
   return (
@@ -25,6 +25,10 @@ const Carousel = ({ images }) => {
       </Slider>
     </div>
   );
+};
+
+Carousel.propTypes = {
+  images: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default Carousel;

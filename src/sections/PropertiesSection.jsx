@@ -1,25 +1,73 @@
 // src/sections/PropertiesSection.jsx
-import { useState, useContext } from 'react';
+import { useState, useContext, useMemo } from 'react';
 import { PropertyContext } from '../context/PropertyContext';
 import PropertyCard from '../components/cards/PropertyCard';
 
-const PropertiesSection = () => {
-  const [filter, setFilter] = useState('all');
-  const { properties } = useContext(PropertyContext);
+const PROPERTIES_PER_PAGE = 6;
 
-  const filteredProperties = properties.filter(
-    (property) => filter === 'all' || property.type === filter
+const PropertiesSection = () => {
+  const [typeFilter, setTypeFilter] = useState('all');
+  const [locationFilter, setLocationFilter] = useState('all');
+  const [priceFilter, setPriceFilter] = useState({ min: 0, max: 10000000 });
+  const [currentPage, setCurrentPage] = useState(1);
+  const [searchQuery, setSearchQuery] = useState('');
+  const { properties, loadingProperties } = useContext(PropertyContext);
+
+  const uniqueLocations = useMemo(() => {
+    const locations = [...new Set(properties.map((p) => p.location))];
+    return locations.sort();
+  }, [properties]);
+
+  const parsePrice = (priceString) => {
+    return parseInt(priceString.replace(/[$,]/g, ''), 10);
+  };
+
+  const filteredProperties = properties.filter((property) => {
+    const matchesType = typeFilter === 'all' || property.type === typeFilter;
+    const matchesLocation =
+      locationFilter === 'all' || property.location === locationFilter;
+    const propertyPrice = parsePrice(property.price);
+    const matchesPrice =
+      propertyPrice >= priceFilter.min && propertyPrice <= priceFilter.max;
+    const matchesSearch =
+      searchQuery === '' ||
+      property.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      property.location.toLowerCase().includes(searchQuery.toLowerCase());
+
+    return matchesType && matchesLocation && matchesPrice && matchesSearch;
+  });
+
+  const totalPages = Math.ceil(filteredProperties.length / PROPERTIES_PER_PAGE);
+  const startIndex = (currentPage - 1) * PROPERTIES_PER_PAGE;
+  const endIndex = startIndex + PROPERTIES_PER_PAGE;
+  const paginatedProperties = filteredProperties.slice(startIndex, endIndex);
+
+  const handleFilterChange = () => {
+    setCurrentPage(1);
+  };
+
+  const LoadingSkeleton = () => (
+    <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3">
+      {[...Array(6)].map((_, i) => (
+        <div key={i} className="animate-pulse">
+          <div className="w-full h-64 bg-gray-300 rounded-lg mb-4"></div>
+          <div className="h-6 bg-gray-300 rounded mb-3"></div>
+          <div className="h-4 bg-gray-300 rounded mb-3 w-3/4"></div>
+          <div className="h-4 bg-gray-300 rounded w-1/2"></div>
+        </div>
+      ))}
+    </div>
   );
 
   return (
-    <section id="properties" className="py-20 bg-gray-100">
+    <section id="properties" className="py-12 sm:py-16 md:py-20 bg-white">
       <div className="container px-4 mx-auto">
-        <div className="flex flex-col items-center w-full mb-10 leading-relaxed text-center">
-          {/* Section Title */}
-          <h3 className="mb-5 text-4xl font-bold text-center sm:text-5xl">
+        {/* Section Header */}
+        <div className="text-center mb-12 md:mb-16">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
             Exclusive High-End Properties
-          </h3>
-          <p className="w-3/4 gap-5 mb-5 text-xl leading-relaxed text-center info-text">
+          </h2>
+          <p className="max-w-3xl mx-auto text-base sm:text-lg text-gray-600 leading-relaxed">
             Our hand-picked selection of premium properties exemplifies luxury
             and elegance. Each home is designed with meticulous attention to
             detail, offering the finest finishes and state-of-the-art amenities.
@@ -27,27 +75,179 @@ const PropertiesSection = () => {
             unique style and high standards.
           </p>
         </div>
-        {/* Filter Buttons */}
-        <div className="flex justify-center mb-8">
-          {['all', 'villa', 'apartment'].map((type) => (
-            <button
-              key={type}
-              onClick={() => setFilter(type)}
-              className={`mx-2 px-4 py-2 rounded ${
-                filter === type ? 'bg-primary text-white' : 'bg-white'
-              }`}
-            >
-              {type.charAt(0).toUpperCase() + type.slice(1)}
-            </button>
-          ))}
+
+        {/* Filters Section */}
+        <div className="bg-white rounded-2xl border border-gray-100 shadow-lg p-6 md:p-8 mb-10 space-y-6">
+          {/* Search Bar */}
+          <div className="flex justify-center">
+            <label htmlFor="search-properties" className="sr-only">
+              Search properties
+            </label>
+            <input
+              id="search-properties"
+              name="search"
+              type="text"
+              placeholder="Search by property name or location..."
+              autoComplete="off"
+              value={searchQuery}
+              onChange={(e) => {
+                setSearchQuery(e.target.value);
+                handleFilterChange();
+              }}
+              disabled={loadingProperties}
+              className="w-full max-w-md px-4 py-3 border border-gray-200 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-secondary focus:border-secondary disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+            />
+          </div>
+
+          {/* Type Filter */}
+          <div className="flex flex-wrap justify-center gap-3">
+            {['all', 'villa', 'apartment'].map((type) => (
+              <button
+                key={type}
+                onClick={() => {
+                  setTypeFilter(type);
+                  handleFilterChange();
+                }}
+                disabled={loadingProperties}
+                className={`px-6 py-2 rounded-lg font-semibold uppercase tracking-wide text-xs transition-all ${
+                  typeFilter === type
+                    ? 'bg-secondary text-gray-900 shadow-lg hover:shadow-xl'
+                    : 'bg-gray-100 text-gray-700 border border-gray-200 hover:border-secondary/30 hover:bg-gray-50'
+                } ${loadingProperties ? 'opacity-50 cursor-not-allowed' : ''}`}
+              >
+                {type.charAt(0).toUpperCase() + type.slice(1)}
+              </button>
+            ))}
+          </div>
+
+          {/* Location and Price Filters */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {/* Location Filter */}
+            <div className="flex flex-col">
+              <label
+                htmlFor="location-filter"
+                className="mb-3 text-sm font-semibold uppercase tracking-wide text-gray-700"
+              >
+                Location
+              </label>
+              <select
+                id="location-filter"
+                value={locationFilter}
+                onChange={(e) => {
+                  setLocationFilter(e.target.value);
+                  handleFilterChange();
+                }}
+                disabled={loadingProperties}
+                className="px-4 py-3 border border-gray-200 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-secondary focus:border-secondary disabled:opacity-50 disabled:cursor-not-allowed transition-all bg-white text-gray-900"
+              >
+                <option value="all">All Locations</option>
+                {uniqueLocations.map((location) => (
+                  <option key={location} value={location}>
+                    {location}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Price Range Filter */}
+            <div className="flex flex-col">
+              <label
+                htmlFor="max-price-filter"
+                className="mb-3 text-sm font-semibold uppercase tracking-wide text-gray-700"
+              >
+                Max Price
+              </label>
+              <input
+                id="max-price-filter"
+                name="maxPrice"
+                type="number"
+                min="0"
+                step="100000"
+                autoComplete="off"
+                value={priceFilter.max}
+                onChange={(e) => {
+                  setPriceFilter({
+                    ...priceFilter,
+                    max: parseInt(e.target.value, 10),
+                  });
+                  handleFilterChange();
+                }}
+                disabled={loadingProperties}
+                className="px-4 py-3 border border-gray-200 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-secondary focus:border-secondary disabled:opacity-50 disabled:cursor-not-allowed transition-all bg-white text-gray-900"
+              />
+            </div>
+          </div>
         </div>
 
-        {/* Properties Grid */}
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3">
-          {filteredProperties.map((property) => (
-            <PropertyCard key={property.id} property={property} />
-          ))}
-        </div>
+        {/* Loading State */}
+        {loadingProperties ? (
+          <LoadingSkeleton />
+        ) : (
+          <>
+            {/* Properties Grid */}
+            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 mb-12">
+              {filteredProperties.length > 0 ? (
+                paginatedProperties.map((property) => (
+                  <PropertyCard key={property.id} property={property} />
+                ))
+              ) : (
+                <div className="col-span-full text-center py-12">
+                  <p className="text-lg text-gray-600">
+                    No properties found matching your criteria.
+                  </p>
+                </div>
+              )}
+            </div>
+
+            {/* Pagination Controls */}
+            {filteredProperties.length > 0 && totalPages > 1 && (
+              <div className="flex items-center justify-center gap-2 flex-wrap">
+                <button
+                  onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+                  disabled={currentPage === 1}
+                  className="px-4 py-3 border border-gray-200 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:border-secondary/30 hover:bg-gray-50 transition-colors font-semibold text-sm uppercase tracking-wide"
+                  aria-label="Previous page"
+                >
+                  Previous
+                </button>
+
+                <div className="flex gap-2 flex-wrap justify-center">
+                  {[...Array(totalPages)].map((_, i) => {
+                    const pageNum = i + 1;
+                    return (
+                      <button
+                        key={pageNum}
+                        onClick={() => setCurrentPage(pageNum)}
+                        className={`px-3 py-2 rounded-lg font-semibold transition-all ${
+                          currentPage === pageNum
+                            ? 'bg-secondary text-gray-900 shadow-lg'
+                            : 'border border-gray-200 hover:border-secondary/30 hover:bg-gray-50'
+                        }`}
+                        aria-label={`Go to page ${pageNum}`}
+                        aria-current={
+                          currentPage === pageNum ? 'page' : undefined
+                        }
+                      >
+                        {pageNum}
+                      </button>
+                    );
+                  })}
+                </div>
+
+                <button
+                  onClick={() =>
+                    setCurrentPage(Math.min(totalPages, currentPage + 1))
+                  }
+                  disabled={currentPage === totalPages}
+                  className="px-4 py-3 border border-gray-200 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:border-secondary/30 hover:bg-gray-50 transition-colors font-semibold text-sm uppercase tracking-wide"
+                  aria-label="Next page"
+                >
+                  Next
+                </button>
+              </div>
+            )}
+          </>
+        )}
       </div>
     </section>
   );

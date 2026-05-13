@@ -7,10 +7,10 @@ import {
 } from '/src/assets/images/index';
 
 export const navLinks = [
-  { href: "#home", label: "Home" },
-  { href: "#features", label: "Features" },
-  { href: "#properties", label: "Properties" },
-  { href: "#contact-us", label: "Contact Us" },
+  { href: '#home', label: 'Home' },
+  { href: '#features', label: 'Features' },
+  { href: '#properties', label: 'Properties' },
+  { href: '#contact-us', label: 'Contact Us' },
 ];
 
 export const testimonials = [

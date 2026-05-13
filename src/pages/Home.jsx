@@ -2,6 +2,11 @@ import Header from '../sections/Header';
 import Hero from '../sections/Hero';
 import FeaturesSection from '../sections/FeaturesSection';
 import PropertiesSection from '../sections/PropertiesSection';
+import MarketInsights from '../sections/MarketInsights';
+import WhyChooseUs from '../sections/WhyChooseUs';
+import TeamSection from '../sections/TeamSection';
+import InvestmentCalculatorSection from '../sections/InvestmentCalculatorSection';
+import FAQSection from '../sections/FAQSection';
 import TestimonialsSection from '../sections/TestimonialsSection';
 import SubscribeSection from '../sections/SubscribeSection';
 import Contact from '../sections/Contact';
@@ -9,24 +14,29 @@ import Contact from '../sections/Contact';
 const Home = () => {
   return (
     <main className="relative">
-      <section className="wide:padding-r padding-b"> 
       <Header />
-      </section>
       <Hero />
-      <section className="padding"> 
-      <FeaturesSection />
+      <section className="padding">
+        <FeaturesSection />
       </section>
       <section className="padding">
-      <PropertiesSection />
+        <PropertiesSection />
       </section>
-      <section className="padding"> 
-      <TestimonialsSection />
+      <MarketInsights />
+      <WhyChooseUs />
+      <section className="padding">
+        <TeamSection />
+      </section>
+      <InvestmentCalculatorSection />
+      <FAQSection />
+      <section className="padding">
+        <TestimonialsSection />
       </section>
       <section className="w-full py-16 padding-x padding-t">
-      <SubscribeSection />
+        <SubscribeSection />
       </section>
       <Contact />
-    </main> 
+    </main>
   );
 };
 
