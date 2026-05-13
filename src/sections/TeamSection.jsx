@@ -4,11 +4,12 @@ const TeamSection = () => {
   const agents = [
     {
       id: 1,
-      name: 'Victoria Sterling',
-      role: 'Senior Luxury Consultant',
-      specialty: 'High-End Properties',
-      bio: 'Specializes in ultra-luxury estates with 15+ years of experience in premium market segments.',
-      image: '/src/assets/images/team/agent-1.jpg',
+      name: 'Victoria',
+      role: 'Client Relations Director',
+      specialty: 'Client Service Excellence',
+      bio: 'Dedicated to understanding client needs and delivering exceptional service throughout their journey.',
+      image: new URL('../assets/images/personas/Victoria.png', import.meta.url)
+        .href,
       contact: {
         email: 'victoria@luxuryestate.com',
         phone: '+1 (555) 123-4001',
@@ -20,11 +21,12 @@ const TeamSection = () => {
     },
     {
       id: 2,
-      name: 'Alexander Knight',
-      role: 'Investment Specialist',
-      specialty: 'Portfolio Management',
-      bio: 'Expert in luxury real estate investments with a proven track record of exceptional returns.',
-      image: '/src/assets/images/team/agent-2.jpg',
+      name: 'Alexander',
+      role: 'Lead Architect',
+      specialty: 'Luxury Design',
+      bio: 'Renowned luxury property designer with 15+ years of experience crafting sophisticated living spaces.',
+      image: new URL('../assets/images/personas/Alexander.png', import.meta.url)
+        .href,
       contact: {
         email: 'alexander@luxuryestate.com',
         phone: '+1 (555) 123-4002',
@@ -36,11 +38,12 @@ const TeamSection = () => {
     },
     {
       id: 3,
-      name: 'Sophia Laurent',
-      role: 'Property Manager',
-      specialty: 'Residential & Commercial',
-      bio: 'Comprehensive property management expertise ensuring maximum value and client satisfaction.',
-      image: '/src/assets/images/team/agent-3.jpg',
+      name: 'Sophia',
+      role: 'Design Consultant',
+      specialty: 'Sustainable Luxury',
+      bio: 'Passionate about sustainable luxury living and personalized interior solutions for discerning clients.',
+      image: new URL('../assets/images/personas/Sophia.png', import.meta.url)
+        .href,
       contact: { email: 'sophia@luxuryestate.com', phone: '+1 (555) 123-4003' },
       social: {
         linkedin: '#',
@@ -49,11 +52,12 @@ const TeamSection = () => {
     },
     {
       id: 4,
-      name: 'Marcus Windsor',
-      role: 'Market Analyst',
-      specialty: 'Market Intelligence',
-      bio: 'Data-driven insights into luxury real estate trends and investment opportunities worldwide.',
-      image: '/src/assets/images/team/agent-4.jpg',
+      name: 'Marcus',
+      role: 'Interior Specialist',
+      specialty: 'Contemporary Design',
+      bio: 'Expert in contemporary design trends and timeless elegance, transforming visions into reality.',
+      image: new URL('../assets/images/personas/Marcus.png', import.meta.url)
+        .href,
       contact: { email: 'marcus@luxuryestate.com', phone: '+1 (555) 123-4004' },
       social: {
         linkedin: '#',
@@ -86,10 +90,14 @@ const TeamSection = () => {
               className="flex flex-col bg-white rounded-2xl border border-gray-100 shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group"
             >
               {/* Agent Image */}
-              <div className="relative overflow-hidden h-48 bg-gradient-to-br from-gray-200 to-gray-300">
-                <div className="w-full h-full flex items-center justify-center text-gray-400 text-6xl font-semibold">
-                  {agent.name.charAt(0)}
-                </div>
+              <div className="relative overflow-hidden h-64 bg-gradient-to-br from-gray-200 to-gray-300">
+                <img
+                  src={agent.image}
+                  alt={agent.name}
+                  className="w-full h-full object-cover transition-transform
+                    duration-300 group-hover:scale-105"
+                  loading="lazy"
+                />
               </div>
 
               {/* Agent Info */}
