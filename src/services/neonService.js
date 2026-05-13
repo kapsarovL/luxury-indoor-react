@@ -1,7 +1,9 @@
 // Neon database service
 // This service provides database operations using Neon serverless PostgreSQL
 
-const API_BASE = process.env.VITE_API_URL || 'http://localhost:3001/api';
+const API_BASE =
+  (typeof process !== 'undefined' && process.env?.VITE_API_URL) ||
+  'http://localhost:3001/api';
 
 export const neonService = {
   // Properties
