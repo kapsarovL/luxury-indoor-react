@@ -2,7 +2,8 @@ import { useRef } from 'react';
 import { useInView } from 'framer-motion';
 import Button from '../components/common/Button';
 import { useToast } from '../hooks/useToast';
-import heroBg from '../assets/images/hero-bg.png';
+import heroBgWebp from '../assets/images/hero-bg.webp';
+import heroBgPng from '../assets/images/hero-bg.png';
 
 const Hero = () => {
   const ref = useRef(null);
@@ -22,7 +23,7 @@ const Hero = () => {
       id="home"
       ref={ref}
       className="relative h-screen text-center bg-fixed bg-center bg-cover"
-      style={{ backgroundImage: `url('${heroBg}')` }}
+      style={{ backgroundImage: `url('${heroBgWebp}'), url('${heroBgPng}')` }}
     >
       <div className="absolute inset-0 bg-black opacity-60"></div>
       <div className="relative z-10 flex flex-col items-center justify-center h-full px-4 py-12">
