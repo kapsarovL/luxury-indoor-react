@@ -1,16 +1,31 @@
+# Allow all bots
 User-agent: *
 Allow: /
+Disallow:
 
+# Explicitly allow social media crawlers
 User-agent: facebookexternalhit
 Allow: /
+Disallow:
 
 User-agent: Twitterbot
 Allow: /
+Disallow:
 
 User-agent: linkedinBot
 Allow: /
+Disallow:
 
 User-agent: WhatsApp
 Allow: /
+Disallow:
+
+User-agent: Googlebot
+Allow: /
+Disallow:
+
+User-agent: bingbot
+Allow: /
+Disallow:
 
 Sitemap: https://luxury-indoor-react.vercel.app/sitemap.xml
