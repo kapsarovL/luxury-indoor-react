@@ -2,7 +2,6 @@
 
 import { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { PropertyProvider } from '../context/PropertyContext';
 import { AuthProvider } from '../context/AuthContext';
 import { SubscriptionProvider } from '../context/SubscriptionContext';
 import { ToastProvider } from '../context/ToastContext';
@@ -30,10 +29,9 @@ const ScrollToTop = () => {
 
 function App() {
   return (
-    <PropertyProvider>
-      <AuthProvider>
-        <SubscriptionProvider>
-          <ToastProvider>
+    <AuthProvider>
+      <SubscriptionProvider>
+        <ToastProvider>
             <Router>
               <ScrollToTop />
               <Routes>
@@ -77,8 +75,8 @@ function App() {
           </ToastProvider>
         </SubscriptionProvider>
       </AuthProvider>
-    </PropertyProvider>
-  );
+    );
+  }
 }
 
 export default App;
