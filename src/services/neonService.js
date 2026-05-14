@@ -1,8 +1,15 @@
 // Neon database service
 // This service provides database operations using Neon serverless PostgreSQL
 
-const API_BASE =
-  import.meta.env.VITE_API_URL || (typeof window !== 'undefined' && window.location.hostname === 'localhost' ? 'http://localhost:3001/api' : '/api');
+const getApiBase = () => {
+  if (typeof window === 'undefined') return '/api';
+  if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+    return 'http://localhost:3001/api';
+  }
+  return '/api';
+};
+
+const API_BASE = getApiBase();
 
 const isLocalAddress = (url) => {
   try {
