@@ -1,3 +1,7 @@
+/* index.css */
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,10 +12,6 @@
   box-sizing: border-box;
   scroll-behavior: smooth;
 }
-
-/* index.css */
-@import "~slick-carousel/slick/slick.css";
-@import "~slick-carousel/slick/slick-theme.css";
 
 @layer components {
   .max-container {
