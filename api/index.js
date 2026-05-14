@@ -1,3 +1,9 @@
 import app from '../server/index.js';
 
-export default app;
+// Handler for Vercel serverless functions
+// The Express app handles all routing
+const handler = (req, res) => {
+  app(req, res);
+};
+
+export default handler;
