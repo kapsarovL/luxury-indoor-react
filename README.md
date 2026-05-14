@@ -62,7 +62,7 @@ Property browsing platform for high-end real estate listings with component-driv
 
 ## Project Structure
 
-```
+```bash
 src/
 ├── components/       # Reusable UI components
 │   ├── cards/       # Property card variants
@@ -141,6 +141,6 @@ npm run lint
 
 **Status:** Completed prototype phase | Client project paused | Code available for review
 
-**Live Demo:** [luxury-indoor.netlify.app](https://luxury-indoor.netlify.app) _(if deployed)_
+**Live Demo:** [luxury-indoor-react.vercel.app](https://luxury-indoor-react.vercel.app/) _(if deployed)_
 
 **Built by:** [Lazar Kapsarov](https://github.com/kapsarovL)
