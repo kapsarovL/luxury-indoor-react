@@ -13,7 +13,7 @@ function Button({
     'font-bold uppercase tracking-wider py-4 px-8 transition-all duration-300 ease-in-out transform rounded-lg inline-flex items-center justify-center gap-3 relative overflow-hidden group slide-up';
 
   const variants = {
-    primary: `bg-secondary text-gray-900 hover:shadow-2xl hover:-translate-y-1 before:absolute before:inset-0 before:bg-yellow-400 before:opacity-0 before:hover:opacity-10 before:transition-opacity`,
+    primary: `bg-secondary text-gray-900 hover:shadow-2xl hover:-translate-y-1 before:absolute before:inset-0 before:bg-yellow-400 before:opacity-0 group-hover:before:opacity-10 before:transition-opacity`,
     secondary: `bg-white text-gray-900 border-2 border-white hover:bg-secondary hover:border-secondary hover:shadow-xl hover:-translate-y-1`,
     dark: `bg-gray-900 text-white border-2 border-white hover:bg-white hover:text-gray-900 hover:shadow-xl hover:-translate-y-1`,
   };
