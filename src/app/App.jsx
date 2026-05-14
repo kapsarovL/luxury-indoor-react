@@ -76,7 +76,6 @@ function App() {
         </SubscriptionProvider>
       </AuthProvider>
     );
-  }
 }
 
 export default App;
