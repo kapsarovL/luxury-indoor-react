@@ -1,3 +1,7 @@
+// Frontend property data with bundled image imports
+// NOTE: For database seeding, use propertySeedData.js which has stable public URL paths
+// ES module imports resolve to bundler-specific hashed filenames and won't work in the database
+
 import gym from '../assets/images/gym.webp';
 import swimmingPool from '../assets/images/swimmingPool.webp';
 import garden from '../assets/images/garden.webp';
