@@ -1,0 +1,16 @@
+User-agent: *
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: linkedinBot
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+Sitemap: https://luxury-indoor-react.vercel.app/sitemap.xml
