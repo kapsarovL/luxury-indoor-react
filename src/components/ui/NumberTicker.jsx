@@ -7,21 +7,15 @@ const NumberTicker = ({ value, suffix = '' }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
 
-  if (typeof value !== 'string' || !value) {
-    console.error('NumberTicker: value prop must be a non-empty string');
-    return <span className="inline-block">{value || '0'}</span>;
-  }
-
-  const numericValue = parseInt(value.replace(/[^0-9]/g, ''), 10);
-
-  if (isNaN(numericValue)) {
-    return <span className="inline-block">{value}</span>;
-  }
-
+  const isValidString = typeof value === 'string' && value;
+  const numericValue = isValidString
+    ? parseInt(value.replace(/[^0-9]/g, ''), 10)
+    : 0;
+  const hasValidNumeric = !isNaN(numericValue);
   const duration = 2000;
 
   useEffect(() => {
-    if (!isInView) return;
+    if (!isInView || !hasValidNumeric) return;
 
     let startTime;
     let animationFrameId = null;
@@ -59,7 +53,16 @@ const NumberTicker = ({ value, suffix = '' }) => {
         cancelAnimationFrame(animationFrameId);
       }
     };
-  }, [isInView, value, suffix, numericValue]);
+  }, [isInView, value, suffix, numericValue, hasValidNumeric]);
+
+  if (!isValidString) {
+    console.error('NumberTicker: value prop must be a non-empty string');
+    return <span className="inline-block">{value || '0'}</span>;
+  }
+
+  if (!hasValidNumeric) {
+    return <span className="inline-block">{value}</span>;
+  }
 
   return (
     <span ref={ref} className="inline-block">
