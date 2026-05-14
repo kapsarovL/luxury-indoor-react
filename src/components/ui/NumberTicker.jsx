@@ -24,7 +24,7 @@ const NumberTicker = ({ value, suffix = '' }) => {
     if (!isInView) return;
 
     let startTime;
-    let animationFrameId;
+    let animationFrameId = null;
 
     const animate = (timestamp) => {
       if (!startTime) startTime = timestamp;
@@ -55,7 +55,7 @@ const NumberTicker = ({ value, suffix = '' }) => {
     animationFrameId = requestAnimationFrame(animate);
 
     return () => {
-      if (animationFrameId) {
+      if (animationFrameId !== null) {
         cancelAnimationFrame(animationFrameId);
       }
     };
