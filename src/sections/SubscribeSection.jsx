@@ -91,41 +91,45 @@ const SubscribeSection = () => {
 
               {/* Newsletter Form */}
               <form onSubmit={handleSubscribe} className="mb-14">
-                <div className="relative group">
-                  <div className="absolute -inset-0.5 bg-gradient-to-r from-secondary/50 to-secondary/30 rounded-xl blur opacity-0 group-hover:opacity-100 transition duration-500" />
-                  <div className="relative flex flex-col sm:flex-row gap-4 bg-gray-900/90 backdrop-blur-sm p-2 rounded-xl border border-gray-800 group-hover:border-secondary/50 transition-all">
-                    <label htmlFor="newsletter-email" className="sr-only">
-                      Email address
-                    </label>
-                    <input
-                      id="newsletter-email"
-                      name="email"
-                      type="email"
-                      autoComplete="email"
-                      placeholder="your@email.com"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      className="flex-1 min-w-0 bg-transparent px-6 py-4 text-white placeholder:text-gray-500 focus:outline-none font-medium text-base"
-                    />
-                    <button
-                      type="submit"
-                      disabled={loading}
-                      className="flex-shrink-0 bg-gradient-to-r from-secondary to-yellow-300 hover:from-yellow-300 hover:to-secondary text-gray-900 px-9 py-4 rounded-lg font-bold uppercase tracking-wider text-sm transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg hover:shadow-secondary/50"
-                    >
-                      {loading ? 'Subscribing...' : 'Subscribe'}
-                    </button>
+                <div className="mb-3">
+                  <label htmlFor="newsletter-email" className="block text-sm font-medium text-gray-300 mb-2">
+                    Email address
+                  </label>
+                  <div className="relative group">
+                    <div className="absolute -inset-0.5 bg-gradient-to-r from-secondary/50 to-secondary/30 rounded-xl blur opacity-0 group-hover:opacity-100 transition duration-500" />
+                    <div className="relative flex flex-col sm:flex-row gap-4 bg-gray-900/90 backdrop-blur-sm p-2 rounded-xl border border-gray-800 group-hover:border-secondary/50 transition-all">
+                      <input
+                        id="newsletter-email"
+                        name="email"
+                        type="email"
+                        autoComplete="email"
+                        placeholder="your@email.com"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        className="flex-1 min-w-0 bg-transparent px-6 py-4 text-white placeholder:text-gray-400 focus:outline-none font-medium text-base"
+                        aria-invalid={!!localError || !!contextError}
+                        aria-describedby={(localError || contextError) ? 'email-error' : undefined}
+                      />
+                      <button
+                        type="submit"
+                        disabled={loading}
+                        className="flex-shrink-0 bg-gradient-to-r from-secondary to-yellow-300 hover:from-yellow-300 hover:to-secondary text-gray-900 px-9 py-4 rounded-lg font-bold uppercase tracking-wider text-sm transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg hover:shadow-secondary/50"
+                      >
+                        {loading ? 'Subscribing...' : 'Subscribe'}
+                      </button>
+                    </div>
                   </div>
                 </div>
 
                 {/* Messages */}
                 {(localError || contextError) && (
-                  <p className="mt-5 text-sm font-medium text-red-400 flex items-center gap-2">
+                  <p id="email-error" role="alert" aria-live="polite" className="mt-5 text-sm font-medium text-red-400 flex items-center gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-red-400 flex-shrink-0" />
                     {localError || contextError}
                   </p>
                 )}
                 {success && (
-                  <p className="mt-5 text-sm font-medium text-green-400 flex items-center gap-2">
+                  <p role="status" aria-live="polite" className="mt-5 text-sm font-medium text-green-400 flex items-center gap-2">
                     <CheckCircleIcon className="w-5 h-5 flex-shrink-0" />
                     Thank you for subscribing! Check your inbox.
                   </p>

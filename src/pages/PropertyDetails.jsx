@@ -126,6 +126,7 @@ const PropertyDetails = () => {
 
               {/* Share Button */}
               <button
+                aria-label="Copy property link to clipboard"
                 onClick={shareProperty}
                 className="w-full px-4 py-2 mt-3 border border-primary text-primary transition duration-300 rounded-md hover:bg-primary hover:text-white flex items-center justify-center gap-2"
               >

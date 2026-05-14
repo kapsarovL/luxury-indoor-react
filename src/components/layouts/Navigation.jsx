@@ -87,6 +87,7 @@ const Navigation = () => {
       {/* Mobile Menu Button */}
       <button
         aria-label={isOpen ? 'Close Menu' : 'Open Menu'}
+        aria-expanded={isOpen}
         onClick={toggleMenu}
         className="lg:hidden p-3 hover:bg-secondary/20 rounded-lg transition-colors duration-300 flex-shrink-0"
       >

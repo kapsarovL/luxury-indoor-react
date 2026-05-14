@@ -76,7 +76,7 @@ const ContactForm = ({ propertyTitle, onClose }) => {
               aria-describedby={errors.name ? 'name-error' : undefined}
             />
             {errors.name && (
-              <p id="name-error" className="mt-1 text-sm text-red-500">
+              <p id="name-error" role="alert" aria-live="polite" className="mt-1 text-sm text-red-500">
                 {errors.name.message}
               </p>
             )}
@@ -99,7 +99,7 @@ const ContactForm = ({ propertyTitle, onClose }) => {
               aria-describedby={errors.email ? 'email-error' : undefined}
             />
             {errors.email && (
-              <p id="email-error" className="mt-1 text-sm text-red-500">
+              <p id="email-error" role="alert" aria-live="polite" className="mt-1 text-sm text-red-500">
                 {errors.email.message}
               </p>
             )}
@@ -125,7 +125,7 @@ const ContactForm = ({ propertyTitle, onClose }) => {
               aria-describedby={errors.message ? 'message-error' : undefined}
             />
             {errors.message && (
-              <p id="message-error" className="mt-1 text-sm text-red-500">
+              <p id="message-error" role="alert" aria-live="polite" className="mt-1 text-sm text-red-500">
                 {errors.message.message}
               </p>
             )}

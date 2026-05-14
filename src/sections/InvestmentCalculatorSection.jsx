@@ -94,6 +94,7 @@ const InvestmentCalculatorSection = () => {
                       setInvestmentAmount(Number(e.target.value))
                     }
                     className="w-full mt-2 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-secondary"
+                    aria-label="Initial Investment Range Slider"
                   />
                 </div>
 
@@ -132,6 +133,7 @@ const InvestmentCalculatorSection = () => {
                     value={propertyValue}
                     onChange={(e) => setPropertyValue(Number(e.target.value))}
                     className="w-full mt-2 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-secondary"
+                    aria-label="Total Property Value Range Slider"
                   />
                 </div>
 
@@ -171,6 +173,7 @@ const InvestmentCalculatorSection = () => {
                     value={expectedROI}
                     onChange={(e) => setExpectedROI(Number(e.target.value))}
                     className="w-full mt-2 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-secondary"
+                    aria-label="Expected Annual ROI Range Slider"
                   />
                 </div>
 
@@ -210,6 +213,7 @@ const InvestmentCalculatorSection = () => {
                     value={investmentYears}
                     onChange={(e) => setInvestmentYears(Number(e.target.value))}
                     className="w-full mt-2 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-secondary"
+                    aria-label="Investment Period Range Slider"
                   />
                 </div>
               </div>

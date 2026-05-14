@@ -54,9 +54,9 @@ const FeaturesSection = () => {
               <div className="mb-8 p-6 rounded-xl bg-secondary/5 group-hover:bg-secondary/10 transition-colors duration-300">
                 {feature.icon}
               </div>
-              <h4 className="mb-5 text-lg md:text-xl font-bold text-gray-900 tracking-tight leading-snug">
+              <h3 className="mb-5 text-lg md:text-xl font-bold text-gray-900 tracking-tight leading-snug">
                 {feature.title}
-              </h4>
+              </h3>
               <p className="text-sm md:text-base text-gray-600 leading-relaxed">
                 {feature.description}
               </p>

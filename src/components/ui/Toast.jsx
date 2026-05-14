@@ -34,7 +34,12 @@ export const ToastContainer = () => {
   const { toasts, removeToast } = useContext(ToastContext);
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 flex flex-col gap-0 pointer-events-none w-full">
+    <div
+      className="fixed top-0 left-0 right-0 z-50 flex flex-col gap-0 pointer-events-none w-full"
+      role="region"
+      aria-live="polite"
+      aria-label="Notifications"
+    >
       <AnimatePresence>
         {toasts.map((toast) => (
           <Toast
@@ -67,9 +72,10 @@ const Toast = ({ toast, onClose }) => {
       <p className="flex-1 text-sm sm:text-base font-semibold">{toast.message}</p>
       <button
         onClick={onClose}
+        aria-label="Close notification"
         className="flex-shrink-0 hover:opacity-60 transition-opacity"
       >
-        <XMarkIcon className="w-6 h-6" />
+        <XMarkIcon className="w-6 h-6" aria-hidden="true" />
       </button>
     </motion.div>
   );

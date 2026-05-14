@@ -74,7 +74,10 @@ const FAQSection = () => {
               className="bg-white border border-gray-100 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
             >
               <button
+                id={`faq-button-${index}`}
                 onClick={() => toggleFAQ(index)}
+                aria-expanded={openIndex === index}
+                aria-controls={`faq-content-${index}`}
                 className="w-full px-8 sm:px-10 py-6 sm:py-7 flex items-center justify-between text-left hover:bg-gray-50 transition-colors duration-300"
               >
                 <h3 className="text-base sm:text-lg font-bold text-gray-900 tracking-tight pr-4">
@@ -84,11 +87,12 @@ const FAQSection = () => {
                   className={`w-5 h-5 text-secondary flex-shrink-0 transition-transform duration-300 ${
                     openIndex === index ? 'rotate-180' : ''
                   }`}
+                  aria-hidden="true"
                 />
               </button>
 
               {openIndex === index && (
-                <div className="border-t border-gray-100 px-8 sm:px-10 py-7 bg-gray-50">
+                <div id={`faq-content-${index}`} className="border-t border-gray-100 px-8 sm:px-10 py-7 bg-gray-50">
                   <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
                     {faq.answer}
                   </p>

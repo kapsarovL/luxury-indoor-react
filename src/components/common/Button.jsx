@@ -26,7 +26,10 @@ function Button({
     >
       <span className="relative z-10">{children}</span>
       {showArrow && (
-        <FaArrowRight className="relative z-10 transform group-hover:translate-x-1 transition-transform" />
+        <FaArrowRight
+          className="relative z-10 transform group-hover:translate-x-1 transition-transform"
+          aria-hidden="true"
+        />
       )}
     </button>
   );

@@ -84,23 +84,25 @@ const PropertiesSection = () => {
         <div className="bg-white rounded-2xl border border-gray-100 shadow-lg p-8 sm:p-12 md:p-16 mb-20 sm:mb-28 space-y-10">
           {/* Search Bar */}
           <div className="flex justify-center pb-4">
-            <label htmlFor="search-properties" className="sr-only">
-              Search properties
-            </label>
-            <input
-              id="search-properties"
-              name="search"
-              type="text"
-              placeholder="Search by property name or location..."
-              autoComplete="off"
-              value={searchQuery}
-              onChange={(e) => {
-                setSearchQuery(e.target.value);
-                handleFilterChange();
-              }}
-              disabled={loadingProperties}
-              className="w-full max-w-md px-5 py-3 border border-gray-200 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-secondary focus:border-secondary disabled:opacity-50 disabled:cursor-not-allowed transition-all text-base"
-            />
+            <div className="w-full max-w-md">
+              <label htmlFor="search-properties" className="block text-sm font-medium text-gray-700 mb-2">
+                Search Properties
+              </label>
+              <input
+                id="search-properties"
+                name="search"
+                type="text"
+                placeholder="Search by property name or location..."
+                autoComplete="off"
+                value={searchQuery}
+                onChange={(e) => {
+                  setSearchQuery(e.target.value);
+                  handleFilterChange();
+                }}
+                disabled={loadingProperties}
+                className="w-full px-5 py-3 border border-gray-200 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-secondary focus:border-secondary disabled:opacity-50 disabled:cursor-not-allowed transition-all text-base"
+              />
+            </div>
           </div>
 
           <div className="border-t border-gray-100 pt-10"></div>

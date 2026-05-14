@@ -60,9 +60,11 @@ const SignupForm = () => {
                   errors.email ? 'border-red-500' : 'border-gray-300'
                 } rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm`}
                 placeholder="Email address"
+                aria-invalid={!!errors.email}
+                aria-describedby={errors.email ? 'email-error' : undefined}
               />
               {errors.email && (
-                <p className="mt-1 text-sm text-red-500">
+                <p id="email-error" role="alert" aria-live="polite" className="mt-1 text-sm text-red-500">
                   {errors.email.message}
                 </p>
               )}
@@ -84,9 +86,11 @@ const SignupForm = () => {
                   errors.username ? 'border-red-500' : 'border-gray-300'
                 } rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm`}
                 placeholder="Username"
+                aria-invalid={!!errors.username}
+                aria-describedby={errors.username ? 'username-error' : undefined}
               />
               {errors.username && (
-                <p className="mt-1 text-sm text-red-500">
+                <p id="username-error" role="alert" aria-live="polite" className="mt-1 text-sm text-red-500">
                   {errors.username.message}
                 </p>
               )}
@@ -108,9 +112,11 @@ const SignupForm = () => {
                   errors.password ? 'border-red-500' : 'border-gray-300'
                 } rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm`}
                 placeholder="Password"
+                aria-invalid={!!errors.password}
+                aria-describedby={errors.password ? 'password-error' : undefined}
               />
               {errors.password && (
-                <p className="mt-1 text-sm text-red-500">
+                <p id="password-error" role="alert" aria-live="polite" className="mt-1 text-sm text-red-500">
                   {errors.password.message}
                 </p>
               )}
@@ -132,9 +138,11 @@ const SignupForm = () => {
                   errors.confirmPassword ? 'border-red-500' : 'border-gray-300'
                 } rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm`}
                 placeholder="Confirm password"
+                aria-invalid={!!errors.confirmPassword}
+                aria-describedby={errors.confirmPassword ? 'confirmPassword-error' : undefined}
               />
               {errors.confirmPassword && (
-                <p className="mt-1 text-sm text-red-500">
+                <p id="confirmPassword-error" role="alert" aria-live="polite" className="mt-1 text-sm text-red-500">
                   {errors.confirmPassword.message}
                 </p>
               )}
