@@ -1,6 +1,6 @@
 // src/context/PropertyContext.jsx
 import { createContext, useState, useEffect } from 'react';
-import { initializeDatabase, getProperties } from '../db/database';
+import { getProperties } from '../db/database';
 import PropTypes from 'prop-types';
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -13,7 +13,6 @@ export const PropertyProvider = ({ children }) => {
   useEffect(() => {
     const loadProperties = async () => {
       try {
-        await initializeDatabase();
         const data = await getProperties();
         console.info('Properties loaded:', data?.length || 0, 'properties');
         setProperties(data || []);
@@ -25,7 +24,6 @@ export const PropertyProvider = ({ children }) => {
       }
     };
 
-    // Load in background without blocking render
     setLoadingProperties(true);
     loadProperties();
   }, []);
