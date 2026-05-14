@@ -7,11 +7,12 @@ const InputField = ({
   placeholder = 'Enter your email address',
   value,
   onChange,
+  autoComplete,
 }) => {
   return (
-    <div className="mb-4">
+    <div className="mb-6">
       <label
-        className="block mb-2 text-sm font-bold text-gray-700"
+        className="block mb-3 text-sm font-semibold text-gray-700 uppercase tracking-wide"
         htmlFor={id}
       >
         {label}
@@ -22,7 +23,8 @@ const InputField = ({
         placeholder={placeholder}
         value={value}
         onChange={onChange}
-        className="min-w-0 flex-auto rounded-md border-0 bg-white/5 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
+        autoComplete={autoComplete}
+        className="w-full rounded-lg border border-gray-200 bg-white px-4 py-3 text-gray-900 shadow-sm focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none transition-all"
       />
     </div>
   );
@@ -35,6 +37,7 @@ InputField.propTypes = {
   placeholder: PropTypes.string,
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
+  autoComplete: PropTypes.string,
 };
 
 export default InputField;

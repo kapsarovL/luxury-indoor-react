@@ -4,7 +4,7 @@ import {
   persona3,
   persona4,
   star,
-} from '/src/assets/images/index';
+} from '../assets/images/index';
 
 export const navLinks = [
   { href: '#home', label: 'Home' },

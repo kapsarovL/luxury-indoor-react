@@ -40,6 +40,7 @@ const Contact = () => {
             <label className="block text-gray-700">Name</label>
             <input
               type="text"
+              autoComplete="name"
               className="block w-full mt-1 border-gray-300 rounded-md shadow-sm"
               value={formData.name}
               onChange={(e) =>
@@ -54,6 +55,7 @@ const Contact = () => {
             <label className="block text-gray-700">Email</label>
             <input
               type="email"
+              autoComplete="email"
               className="block w-full mt-1 border-gray-300 rounded-md shadow-sm"
               value={formData.email}
               onChange={(e) =>
@@ -67,6 +69,7 @@ const Contact = () => {
           <div>
             <label className="block text-gray-700">Message</label>
             <textarea
+              autoComplete="off"
               className="block w-full mt-1 border-gray-300 rounded-md shadow-sm"
               rows="5"
               value={formData.message}

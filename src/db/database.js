@@ -1,30 +1,43 @@
 import { neonService } from '../services/neonService';
 import { properties as propertyData } from '../data/propertyData';
 
+console.info(
+  'Static propertyData loaded:',
+  propertyData?.length || 0,
+  'properties'
+);
+
 export const initializeDatabase = async () => {
   try {
     const properties = await neonService.getProperties();
     if (!properties || properties.length === 0) {
-      for (const property of propertyData) {
-        const dbProperty = {
-          ...property,
-          images: property.imgURL
-            ? [property.imgURL, ...(property.images || [])]
-            : property.images || [],
-        };
-        await neonService.createProperty(dbProperty);
-      }
+      console.info('No properties found. Using static data as fallback.');
     }
-  } catch (error) {
-    console.error('Database initialization error:', error);
+  } catch {
+    console.info('Property fetch failed. Using static data as fallback.');
   }
 };
 
 export const getProperties = async () => {
   try {
-    return await neonService.getProperties();
+    const apiProperties = await neonService.getProperties();
+    console.info('API returned:', apiProperties?.length || 0, 'properties');
+    if (!apiProperties || apiProperties.length === 0) {
+      console.info(
+        'Using static propertyData:',
+        propertyData?.length || 0,
+        'properties'
+      );
+      return propertyData;
+    }
+    return apiProperties;
   } catch (error) {
     console.error('Error fetching properties:', error);
+    console.info(
+      'Fallback to static propertyData:',
+      propertyData?.length || 0,
+      'properties'
+    );
     return propertyData;
   }
 };
@@ -62,18 +75,33 @@ export const deleteProperty = async (id) => {
   }
 };
 
+const USERS_STORAGE_KEY = 'luxury_users';
+
 export const createUser = async (userData) => {
   try {
-    return await neonService.createUser(userData);
-  } catch (error) {
-    console.error('Error creating user:', error);
-    throw error;
+    const usersData = localStorage.getItem(USERS_STORAGE_KEY);
+    const users = usersData ? JSON.parse(usersData) : [];
+
+    const newUser = {
+      id: Date.now().toString(),
+      ...userData,
+      createdAt: new Date().toISOString(),
+    };
+
+    users.push(newUser);
+    localStorage.setItem(USERS_STORAGE_KEY, JSON.stringify(users));
+    return newUser;
+  } catch (err) {
+    console.error('Error creating user:', err);
+    throw err;
   }
 };
 
 export const getUserByEmail = async (email) => {
   try {
-    return await neonService.getUserByEmail(email);
+    const usersData = localStorage.getItem(USERS_STORAGE_KEY);
+    const users = usersData ? JSON.parse(usersData) : [];
+    return users.find((u) => u.email === email) || null;
   } catch (error) {
     console.error('Error fetching user:', error);
     return null;
@@ -82,7 +110,9 @@ export const getUserByEmail = async (email) => {
 
 export const getUserByUsername = async (username) => {
   try {
-    return await neonService.getUserByUsername(username);
+    const usersData = localStorage.getItem(USERS_STORAGE_KEY);
+    const users = usersData ? JSON.parse(usersData) : [];
+    return users.find((u) => u.username === username) || null;
   } catch (error) {
     console.error('Error fetching user:', error);
     return null;
@@ -91,7 +121,9 @@ export const getUserByUsername = async (username) => {
 
 export const getUserById = async (id) => {
   try {
-    return await neonService.getUserById(id);
+    const usersData = localStorage.getItem(USERS_STORAGE_KEY);
+    const users = usersData ? JSON.parse(usersData) : [];
+    return users.find((u) => u.id === id) || null;
   } catch (error) {
     console.error('Error fetching user:', error);
     return null;
@@ -100,7 +132,17 @@ export const getUserById = async (id) => {
 
 export const updateUser = async (id, updates) => {
   try {
-    return await neonService.updateUser(id, updates);
+    const usersData = localStorage.getItem(USERS_STORAGE_KEY);
+    const users = usersData ? JSON.parse(usersData) : [];
+    const userIndex = users.findIndex((u) => u.id === id);
+
+    if (userIndex === -1) {
+      throw new Error('User not found');
+    }
+
+    users[userIndex] = { ...users[userIndex], ...updates };
+    localStorage.setItem(USERS_STORAGE_KEY, JSON.stringify(users));
+    return users[userIndex];
   } catch (error) {
     console.error('Error updating user:', error);
   }
@@ -108,7 +150,10 @@ export const updateUser = async (id, updates) => {
 
 export const deleteUser = async (id) => {
   try {
-    return await neonService.deleteUser(id);
+    const usersData = localStorage.getItem(USERS_STORAGE_KEY);
+    const users = usersData ? JSON.parse(usersData) : [];
+    const filtered = users.filter((u) => u.id !== id);
+    localStorage.setItem(USERS_STORAGE_KEY, JSON.stringify(filtered));
   } catch (error) {
     console.error('Error deleting user:', error);
   }

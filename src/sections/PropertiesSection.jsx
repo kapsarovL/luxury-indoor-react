@@ -60,14 +60,18 @@ const PropertiesSection = () => {
   );
 
   return (
-    <section id="properties" className="py-12 sm:py-16 md:py-20 bg-white">
+    <section
+      id="properties"
+      className="py-12 sm:py-16 md:py-20 lg:py-28 bg-white"
+    >
       <div className="container px-4 mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-12 md:mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+        <div className="text-center mb-16 sm:mb-20 md:mb-28 max-w-4xl mx-auto">
+          <h2 className="text-4xl sm:text-5xl lg:text-5xl font-bold text-gray-900 mb-8 leading-tight">
             Exclusive High-End Properties
           </h2>
-          <p className="max-w-3xl mx-auto text-base sm:text-lg text-gray-600 leading-relaxed">
+          <div className="h-2"></div>
+          <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
             Our hand-picked selection of premium properties exemplifies luxury
             and elegance. Each home is designed with meticulous attention to
             detail, offering the finest finishes and state-of-the-art amenities.
@@ -77,9 +81,9 @@ const PropertiesSection = () => {
         </div>
 
         {/* Filters Section */}
-        <div className="bg-white rounded-2xl border border-gray-100 shadow-lg p-6 md:p-8 mb-10 space-y-6">
+        <div className="bg-white rounded-2xl border border-gray-100 shadow-lg p-8 sm:p-12 md:p-16 mb-20 sm:mb-28 space-y-10">
           {/* Search Bar */}
-          <div className="flex justify-center">
+          <div className="flex justify-center pb-4">
             <label htmlFor="search-properties" className="sr-only">
               Search properties
             </label>
@@ -95,12 +99,14 @@ const PropertiesSection = () => {
                 handleFilterChange();
               }}
               disabled={loadingProperties}
-              className="w-full max-w-md px-4 py-3 border border-gray-200 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-secondary focus:border-secondary disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+              className="w-full max-w-md px-5 py-3 border border-gray-200 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-secondary focus:border-secondary disabled:opacity-50 disabled:cursor-not-allowed transition-all text-base"
             />
           </div>
 
+          <div className="border-t border-gray-100 pt-10"></div>
+
           {/* Type Filter */}
-          <div className="flex flex-wrap justify-center gap-3">
+          <div className="flex flex-wrap justify-center gap-4">
             {['all', 'villa', 'apartment'].map((type) => (
               <button
                 key={type}
@@ -109,7 +115,7 @@ const PropertiesSection = () => {
                   handleFilterChange();
                 }}
                 disabled={loadingProperties}
-                className={`px-6 py-2 rounded-lg font-semibold uppercase tracking-wide text-xs transition-all ${
+                className={`px-7 py-3 rounded-lg font-semibold uppercase tracking-wide text-xs transition-all ${
                   typeFilter === type
                     ? 'bg-secondary text-gray-900 shadow-lg hover:shadow-xl'
                     : 'bg-gray-100 text-gray-700 border border-gray-200 hover:border-secondary/30 hover:bg-gray-50'
@@ -120,8 +126,10 @@ const PropertiesSection = () => {
             ))}
           </div>
 
+          <div className="border-t border-gray-100 pt-10"></div>
+
           {/* Location and Price Filters */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
             {/* Location Filter */}
             <div className="flex flex-col">
               <label
@@ -185,14 +193,14 @@ const PropertiesSection = () => {
         ) : (
           <>
             {/* Properties Grid */}
-            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 mb-12">
+            <div className="grid grid-cols-1 gap-8 sm:gap-10 lg:gap-12 sm:grid-cols-2 md:grid-cols-3 mb-20 sm:mb-24">
               {filteredProperties.length > 0 ? (
                 paginatedProperties.map((property) => (
                   <PropertyCard key={property.id} property={property} />
                 ))
               ) : (
-                <div className="col-span-full text-center py-12">
-                  <p className="text-lg text-gray-600">
+                <div className="col-span-full text-center py-20 sm:py-28">
+                  <p className="text-lg sm:text-xl text-gray-600">
                     No properties found matching your criteria.
                   </p>
                 </div>
@@ -201,7 +209,7 @@ const PropertiesSection = () => {
 
             {/* Pagination Controls */}
             {filteredProperties.length > 0 && totalPages > 1 && (
-              <div className="flex items-center justify-center gap-2 flex-wrap">
+              <div className="flex items-center justify-center gap-4 flex-wrap pt-12 border-t border-gray-200">
                 <button
                   onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
                   disabled={currentPage === 1}

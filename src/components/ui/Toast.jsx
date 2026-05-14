@@ -32,9 +32,10 @@ const iconColorMap = {
 
 export const ToastContainer = () => {
   const { toasts, removeToast } = useContext(ToastContext);
+  console.log('ToastContainer rendering, toasts:', toasts);
 
   return (
-    <div className="fixed bottom-4 right-4 z-50 flex flex-col gap-2 pointer-events-none max-w-sm">
+    <div className="fixed top-0 left-0 right-0 z-50 flex flex-col gap-0 pointer-events-none w-full">
       <AnimatePresence>
         {toasts.map((toast) => (
           <Toast
@@ -53,23 +54,23 @@ const Toast = ({ toast, onClose }) => {
 
   return (
     <motion.div
-      initial={{ opacity: 0, x: 100 }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: 100 }}
-      transition={{ duration: 0.3 }}
-      className={`border rounded-lg p-4 shadow-lg flex items-start gap-3 pointer-events-auto ${
+      initial={{ opacity: 0, y: -100 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -100 }}
+      transition={{ duration: 0.4 }}
+      className={`w-full px-4 sm:px-6 lg:px-8 py-4 sm:py-5 shadow-2xl flex items-center gap-4 pointer-events-auto border-b ${
         colorMap[toast.type]
       }`}
     >
       <Icon
-        className={`w-5 h-5 flex-shrink-0 mt-0.5 ${iconColorMap[toast.type]}`}
+        className={`w-6 h-6 flex-shrink-0 ${iconColorMap[toast.type]}`}
       />
-      <p className="flex-1 text-sm font-medium">{toast.message}</p>
+      <p className="flex-1 text-sm sm:text-base font-semibold">{toast.message}</p>
       <button
         onClick={onClose}
-        className="flex-shrink-0 text-lg hover:opacity-70 transition-opacity"
+        className="flex-shrink-0 hover:opacity-60 transition-opacity"
       >
-        <XMarkIcon className="w-5 h-5" />
+        <XMarkIcon className="w-6 h-6" />
       </button>
     </motion.div>
   );

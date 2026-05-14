@@ -19,17 +19,21 @@ const InvestmentCalculatorSection = () => {
   const annualRentalIncome = propertyValue * 0.05;
 
   return (
-    <section id="calculator" className="py-12 sm:py-16 md:py-20 bg-ghost">
+    <section
+      id="calculator"
+      className="py-12 sm:py-16 md:py-20 lg:py-28 bg-ghost"
+    >
       <div className="container px-4 mx-auto">
         {/* Header */}
-        <div className="text-center mb-16 md:mb-20">
+        <div className="text-center mb-16 sm:mb-20 md:mb-28 max-w-3xl mx-auto">
           <p className="text-secondary text-xs sm:text-sm font-bold uppercase tracking-[0.2em] mb-4">
             Financial Planning
           </p>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 mb-6">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 mb-6 leading-tight">
             Investment Calculator
           </h2>
-          <p className="max-w-3xl mx-auto text-base sm:text-lg text-gray-600 leading-relaxed">
+          <div className="h-2"></div>
+          <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
             Calculate your potential returns and explore different investment
             scenarios with our interactive luxury real estate investment
             calculator.
@@ -38,11 +42,11 @@ const InvestmentCalculatorSection = () => {
 
         {/* Calculator */}
         <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12">
             {/* Input Section */}
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-lg p-8">
-              <div className="flex items-center gap-3 mb-8">
-                <div className="p-3 rounded-lg bg-secondary/10 text-secondary">
+            <div className="bg-white rounded-2xl border border-gray-100 shadow-lg p-8 sm:p-10 lg:p-12">
+              <div className="flex items-center gap-4 mb-10">
+                <div className="p-4 rounded-lg bg-secondary/10 text-secondary flex-shrink-0">
                   <FaCalculator className="w-6 h-6" />
                 </div>
                 <h3 className="text-xl font-bold text-gray-900">
@@ -50,12 +54,12 @@ const InvestmentCalculatorSection = () => {
                 </h3>
               </div>
 
-              <div className="space-y-6">
+              <div className="space-y-8">
                 {/* Investment Amount */}
                 <div>
                   <label
                     htmlFor="investmentAmount"
-                    className="block text-sm font-semibold uppercase tracking-wider text-gray-700 mb-2"
+                    className="block text-sm font-semibold uppercase tracking-wider text-gray-700 mb-3"
                   >
                     Initial Investment
                   </label>
@@ -69,6 +73,7 @@ const InvestmentCalculatorSection = () => {
                       type="number"
                       min="0"
                       step="50000"
+                      autoComplete="off"
                       value={investmentAmount}
                       onChange={(e) =>
                         setInvestmentAmount(Number(e.target.value))
@@ -83,6 +88,7 @@ const InvestmentCalculatorSection = () => {
                     min="50000"
                     max="2000000"
                     step="50000"
+                    autoComplete="off"
                     value={investmentAmount}
                     onChange={(e) =>
                       setInvestmentAmount(Number(e.target.value))
@@ -95,7 +101,7 @@ const InvestmentCalculatorSection = () => {
                 <div>
                   <label
                     htmlFor="propertyValue"
-                    className="block text-sm font-semibold uppercase tracking-wider text-gray-700 mb-2"
+                    className="block text-sm font-semibold uppercase tracking-wider text-gray-700 mb-3"
                   >
                     Total Property Value
                   </label>
@@ -109,6 +115,7 @@ const InvestmentCalculatorSection = () => {
                       type="number"
                       min="0"
                       step="50000"
+                      autoComplete="off"
                       value={propertyValue}
                       onChange={(e) => setPropertyValue(Number(e.target.value))}
                       className="w-full pl-8 pr-4 py-3 border border-gray-200 rounded-lg focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none transition-colors"
@@ -121,6 +128,7 @@ const InvestmentCalculatorSection = () => {
                     min="100000"
                     max="5000000"
                     step="100000"
+                    autoComplete="off"
                     value={propertyValue}
                     onChange={(e) => setPropertyValue(Number(e.target.value))}
                     className="w-full mt-2 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-secondary"
@@ -143,6 +151,7 @@ const InvestmentCalculatorSection = () => {
                       min="0"
                       max="100"
                       step="0.5"
+                      autoComplete="off"
                       value={expectedROI}
                       onChange={(e) => setExpectedROI(Number(e.target.value))}
                       className="w-full pr-8 pl-4 py-3 border border-gray-200 rounded-lg focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none transition-colors"
@@ -158,6 +167,7 @@ const InvestmentCalculatorSection = () => {
                     min="0"
                     max="30"
                     step="0.5"
+                    autoComplete="off"
                     value={expectedROI}
                     onChange={(e) => setExpectedROI(Number(e.target.value))}
                     className="w-full mt-2 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-secondary"
@@ -179,6 +189,7 @@ const InvestmentCalculatorSection = () => {
                       type="number"
                       min="1"
                       max="30"
+                      autoComplete="off"
                       value={investmentYears}
                       onChange={(e) =>
                         setInvestmentYears(Number(e.target.value))
@@ -195,6 +206,7 @@ const InvestmentCalculatorSection = () => {
                     type="range"
                     min="1"
                     max="30"
+                    autoComplete="off"
                     value={investmentYears}
                     onChange={(e) => setInvestmentYears(Number(e.target.value))}
                     className="w-full mt-2 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-secondary"
@@ -204,16 +216,16 @@ const InvestmentCalculatorSection = () => {
             </div>
 
             {/* Results Section */}
-            <div className="space-y-4">
+            <div className="space-y-6">
               {/* Main Results Card */}
-              <div className="bg-white rounded-2xl border border-gray-100 shadow-lg p-8">
-                <h3 className="text-lg font-bold text-gray-900 mb-6 tracking-tight">
+              <div className="bg-white rounded-2xl border border-gray-100 shadow-lg p-8 sm:p-10 lg:p-12">
+                <h3 className="text-lg font-bold text-gray-900 mb-8 tracking-tight">
                   Investment Summary
                 </h3>
 
-                <div className="space-y-4">
-                  <div className="p-4 rounded-lg bg-gray-50 border border-gray-100">
-                    <p className="text-xs uppercase tracking-wider text-gray-600 font-semibold mb-1">
+                <div className="space-y-5">
+                  <div className="p-6 rounded-lg bg-gray-50 border border-gray-100">
+                    <p className="text-xs uppercase tracking-wider text-gray-600 font-semibold mb-2">
                       Down Payment
                     </p>
                     <p className="text-2xl font-bold text-gray-900">
@@ -224,8 +236,8 @@ const InvestmentCalculatorSection = () => {
                     </p>
                   </div>
 
-                  <div className="p-4 rounded-lg bg-gray-50 border border-gray-100">
-                    <p className="text-xs uppercase tracking-wider text-gray-600 font-semibold mb-1">
+                  <div className="p-6 rounded-lg bg-gray-50 border border-gray-100">
+                    <p className="text-xs uppercase tracking-wider text-gray-600 font-semibold mb-2">
                       Financing Required
                     </p>
                     <p className="text-2xl font-bold text-gray-900">
@@ -236,8 +248,8 @@ const InvestmentCalculatorSection = () => {
                     </p>
                   </div>
 
-                  <div className="p-4 rounded-lg bg-secondary/5 border border-secondary/20">
-                    <p className="text-xs uppercase tracking-wider text-secondary font-semibold mb-1">
+                  <div className="p-6 rounded-lg bg-secondary/5 border border-secondary/20">
+                    <p className="text-xs uppercase tracking-wider text-secondary font-semibold mb-2">
                       Annual Return
                     </p>
                     <p className="text-2xl font-bold text-secondary">
@@ -248,8 +260,8 @@ const InvestmentCalculatorSection = () => {
                     </p>
                   </div>
 
-                  <div className="p-4 rounded-lg bg-secondary/5 border border-secondary/20">
-                    <p className="text-xs uppercase tracking-wider text-secondary font-semibold mb-1">
+                  <div className="p-6 rounded-lg bg-secondary/5 border border-secondary/20">
+                    <p className="text-xs uppercase tracking-wider text-secondary font-semibold mb-2">
                       Total Profit ({investmentYears} years)
                     </p>
                     <p className="text-2xl font-bold text-secondary">
@@ -263,17 +275,17 @@ const InvestmentCalculatorSection = () => {
               </div>
 
               {/* Performance Card */}
-              <div className="bg-white rounded-2xl border border-gray-100 shadow-lg p-8">
-                <h3 className="text-lg font-bold text-gray-900 mb-6 tracking-tight">
+              <div className="bg-white rounded-2xl border border-gray-100 shadow-lg p-8 sm:p-10 lg:p-12">
+                <h3 className="text-lg font-bold text-gray-900 mb-8 tracking-tight">
                   Performance Metrics
                 </h3>
 
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between p-4 rounded-lg bg-gray-50 border border-gray-100">
+                <div className="space-y-5">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-6 rounded-lg bg-gray-50 border border-gray-100">
                     <span className="text-sm font-semibold text-gray-600">
                       Total Investment Value
                     </span>
-                    <span className="text-xl font-bold text-gray-900">
+                    <span className="text-xl font-bold text-gray-900 flex-shrink-0">
                       $
                       {totalInvestment.toLocaleString('en-US', {
                         minimumFractionDigits: 0,
@@ -281,20 +293,20 @@ const InvestmentCalculatorSection = () => {
                     </span>
                   </div>
 
-                  <div className="flex items-center justify-between p-4 rounded-lg bg-secondary/5 border border-secondary/20">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-6 rounded-lg bg-secondary/5 border border-secondary/20">
                     <span className="text-sm font-semibold text-gray-600">
                       Profit Margin
                     </span>
-                    <span className="text-xl font-bold text-secondary">
+                    <span className="text-xl font-bold text-secondary flex-shrink-0">
                       {profitMargin.toFixed(1)}%
                     </span>
                   </div>
 
-                  <div className="flex items-center justify-between p-4 rounded-lg bg-gray-50 border border-gray-100">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-6 rounded-lg bg-gray-50 border border-gray-100">
                     <span className="text-sm font-semibold text-gray-600">
                       Est. Annual Rental Income
                     </span>
-                    <span className="text-xl font-bold text-gray-900">
+                    <span className="text-xl font-bold text-gray-900 flex-shrink-0">
                       $
                       {annualRentalIncome.toLocaleString('en-US', {
                         minimumFractionDigits: 0,
@@ -302,11 +314,11 @@ const InvestmentCalculatorSection = () => {
                     </span>
                   </div>
 
-                  <div className="flex items-center justify-between p-4 rounded-lg bg-gray-50 border border-gray-100">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-6 rounded-lg bg-gray-50 border border-gray-100">
                     <span className="text-sm font-semibold text-gray-600">
                       Rental Yield
                     </span>
-                    <span className="text-xl font-bold text-gray-900">
+                    <span className="text-xl font-bold text-gray-900 flex-shrink-0">
                       {rentalYield.toFixed(1)}%
                     </span>
                   </div>
@@ -314,7 +326,7 @@ const InvestmentCalculatorSection = () => {
               </div>
 
               {/* CTA */}
-              <button className="w-full px-8 py-4 bg-secondary text-gray-900 font-bold uppercase tracking-wider rounded-lg hover:bg-yellow-300 shadow-lg hover:shadow-xl transition-all duration-300 text-sm">
+              <button className="w-full px-8 py-5 bg-secondary text-gray-900 font-bold uppercase tracking-wider rounded-lg hover:bg-yellow-300 shadow-lg hover:shadow-xl transition-all duration-300 text-sm">
                 Schedule Consultation
               </button>
             </div>

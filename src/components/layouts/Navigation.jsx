@@ -77,10 +77,10 @@ const Navigation = () => {
         </Link>
         <div className="h-6 w-px bg-white/20" />
         <Link
-          to="/"
+          to="/signup"
           className="px-8 py-3 bg-secondary text-gray-900 font-semibold uppercase tracking-wider rounded-lg hover:bg-yellow-300 transition-all duration-300 text-xs whitespace-nowrap"
         >
-          Explore Now
+          Sign Up
         </Link>
       </div>
 
@@ -126,11 +126,11 @@ const Navigation = () => {
             </li>
             <li className="px-4 sm:px-6 py-2 sm:py-3">
               <Link
-                to="/"
+                to="/signup"
                 onClick={closeMenu}
                 className="text-xs sm:text-sm font-semibold uppercase tracking-wide text-gray-900 bg-secondary hover:bg-yellow-300 cursor-pointer block py-3 px-4 rounded-lg transition-all duration-300 text-center"
               >
-                Explore Now
+                Sign Up
               </Link>
             </li>
           </ul>

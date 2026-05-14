@@ -1,3 +1,5 @@
+import NumberTicker from './NumberTicker';
+
 const Stats = () => {
   return (
     <div className="py-20 sm:py-32">
@@ -8,7 +10,7 @@ const Stats = () => {
               Transactions every 24 hours
             </dt>
             <dd className="order-first text-4xl sm:text-5xl font-bold tracking-tight text-secondary">
-              44 million
+              <NumberTicker value="44 million" />
             </dd>
           </div>
           <div className="flex flex-col max-w-xs mx-auto gap-y-4">
@@ -16,7 +18,7 @@ const Stats = () => {
               Assets under holding
             </dt>
             <dd className="order-first text-4xl sm:text-5xl font-bold tracking-tight text-secondary">
-              $119 trillion
+              <NumberTicker value="$119 trillion" />
             </dd>
           </div>
 
@@ -25,7 +27,7 @@ const Stats = () => {
               New users annually
             </dt>
             <dd className="order-first text-4xl sm:text-5xl font-bold tracking-tight text-secondary">
-              46,000
+              <NumberTicker value="46,000" />
             </dd>
           </div>
         </dl>

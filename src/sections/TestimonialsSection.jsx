@@ -3,14 +3,18 @@ import { testimonials } from '../data/data';
 
 const TestimonialsSection = () => {
   return (
-    <section id="testimonials" className="py-12 sm:py-16 md:py-20 bg-ghost">
+    <section
+      id="testimonials"
+      className="py-12 sm:py-16 md:py-20 lg:py-28 bg-ghost"
+    >
       <div className="container px-4 mx-auto">
-        <div className="text-center mb-12 md:mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 mb-6">
+        <div className="text-center mb-16 sm:mb-20 md:mb-28 max-w-3xl mx-auto">
+          <h2 className="text-4xl sm:text-5xl lg:text-5xl font-bold tracking-tight text-gray-900 mb-8 leading-tight">
             What Our Clients Say
           </h2>
+          <div className="h-2"></div>
 
-          <p className="max-w-2xl mx-auto text-base sm:text-lg text-gray-600 leading-relaxed">
+          <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
             Our clients in the luxury real estate market trust us to create
             exceptional websites that highlight their properties&apos; unique
             qualities and appeal to affluent buyers. Hear from those who have
@@ -18,7 +22,7 @@ const TestimonialsSection = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 lg:gap-12">
           {testimonials.map((testimonial, index) => (
             <TestimonialsCard
               key={index}

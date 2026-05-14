@@ -15,9 +15,11 @@ export const PropertyProvider = ({ children }) => {
       try {
         await initializeDatabase();
         const data = await getProperties();
-        setProperties(data);
+        console.info('Properties loaded:', data?.length || 0, 'properties');
+        setProperties(data || []);
       } catch (error) {
         console.error('Failed to load properties:', error);
+        setProperties([]);
       } finally {
         setLoadingProperties(false);
       }

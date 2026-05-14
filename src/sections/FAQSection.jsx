@@ -49,24 +49,25 @@ const FAQSection = () => {
   };
 
   return (
-    <section id="faq" className="py-12 sm:py-16 md:py-20 bg-white">
+    <section id="faq" className="py-12 sm:py-16 md:py-20 lg:py-28 bg-white">
       <div className="container px-4 mx-auto">
         {/* Header */}
-        <div className="text-center mb-16 md:mb-20">
+        <div className="text-center mb-16 sm:mb-20 md:mb-28 max-w-3xl mx-auto">
           <p className="text-secondary text-xs sm:text-sm font-bold uppercase tracking-[0.2em] mb-4">
             Questions & Answers
           </p>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 mb-6">
+          <h2 className="text-4xl sm:text-5xl lg:text-5xl font-bold tracking-tight text-gray-900 mb-8 leading-tight">
             Frequently Asked Questions
           </h2>
-          <p className="max-w-3xl mx-auto text-base sm:text-lg text-gray-600 leading-relaxed">
+          <div className="h-2"></div>
+          <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
             Find answers to common questions about our luxury real estate
             investments, financing options, and property management services.
           </p>
         </div>
 
         {/* FAQ Items */}
-        <div className="max-w-3xl mx-auto space-y-4">
+        <div className="max-w-3xl mx-auto space-y-5">
           {faqs.map((faq, index) => (
             <div
               key={faq.id}
@@ -74,9 +75,9 @@ const FAQSection = () => {
             >
               <button
                 onClick={() => toggleFAQ(index)}
-                className="w-full px-8 py-6 flex items-center justify-between text-left hover:bg-gray-50 transition-colors duration-300"
+                className="w-full px-8 sm:px-10 py-6 sm:py-7 flex items-center justify-between text-left hover:bg-gray-50 transition-colors duration-300"
               >
-                <h3 className="text-lg font-bold text-gray-900 tracking-tight pr-4">
+                <h3 className="text-base sm:text-lg font-bold text-gray-900 tracking-tight pr-4">
                   {faq.question}
                 </h3>
                 <FaChevronDown
@@ -87,8 +88,10 @@ const FAQSection = () => {
               </button>
 
               {openIndex === index && (
-                <div className="border-t border-gray-100 px-8 py-6 bg-gray-50">
-                  <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
+                <div className="border-t border-gray-100 px-8 sm:px-10 py-7 bg-gray-50">
+                  <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
+                    {faq.answer}
+                  </p>
                 </div>
               )}
             </div>
@@ -96,11 +99,11 @@ const FAQSection = () => {
         </div>
 
         {/* CTA */}
-        <div className="mt-16 text-center">
-          <p className="text-gray-600 mb-6">
+        <div className="mt-20 sm:mt-24 text-center">
+          <p className="text-gray-600 mb-8">
             Didn&apos;t find your answer? Our experts are ready to help.
           </p>
-          <button className="px-8 py-4 bg-secondary text-gray-900 font-bold uppercase tracking-wider rounded-lg hover:bg-yellow-300 shadow-lg hover:shadow-xl transition-all duration-300 text-sm whitespace-nowrap">
+          <button className="px-9 py-5 bg-secondary text-gray-900 font-bold uppercase tracking-wider rounded-lg hover:bg-yellow-300 shadow-lg hover:shadow-xl transition-all duration-300 text-sm">
             Contact Our Experts
           </button>
         </div>

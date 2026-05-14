@@ -1,19 +1,19 @@
-const gym = '/src/assets/images/gym.webp';
-const swimmingPool = '/src/assets/images/swimmingPool.webp';
-const garden = '/src/assets/images/garden.webp';
-const homeTheater = '/src/assets/images/homeTheater.webp';
-const villa1 = '/src/assets/images/villa1.webp';
-const villa2 = '/src/assets/images/villa2.webp';
-const villa3 = '/src/assets/images/villa3.webp';
-const villa4 = '/src/assets/images/villa4.webp';
-const villa5 = '/src/assets/images/villa5.webp';
-const villa6 = '/src/assets/images/villa6.webp';
-const apartment1 = '/src/assets/images/apartment1.webp';
-const apartment2 = '/src/assets/images/apartment2.webp';
-const apartment3 = '/src/assets/images/apartment3.webp';
-const apartment4 = '/src/assets/images/apartment4.webp';
-const apartment5 = '/src/assets/images/apartment5.webp';
-const apartment6 = '/src/assets/images/apartment6.webp';
+import gym from '../assets/images/gym.webp';
+import swimmingPool from '../assets/images/swimmingPool.webp';
+import garden from '../assets/images/garden.webp';
+import homeTheater from '../assets/images/homeTheater.webp';
+import villa1 from '../assets/images/villa1.webp';
+import villa2 from '../assets/images/villa2.webp';
+import villa3 from '../assets/images/villa3.webp';
+import villa4 from '../assets/images/villa4.webp';
+import villa5 from '../assets/images/villa5.webp';
+import villa6 from '../assets/images/villa6.webp';
+import apartment1 from '../assets/images/apartment1.webp';
+import apartment2 from '../assets/images/apartment2.webp';
+import apartment3 from '../assets/images/apartment3.webp';
+import apartment4 from '../assets/images/apartment4.webp';
+import apartment5 from '../assets/images/apartment5.webp';
+import apartment6 from '../assets/images/apartment6.webp';
 
 export const properties = [
   // Villas

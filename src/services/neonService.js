@@ -9,13 +9,21 @@ export const neonService = {
   // Properties
   async getProperties() {
     const response = await fetch(`${API_BASE}/properties`);
-    if (!response.ok) throw new Error('Failed to fetch properties');
+    if (!response.ok) {
+      const error = new Error('Failed to fetch properties');
+      error.status = response.status;
+      throw error;
+    }
     return response.json();
   },
 
   async getPropertyById(id) {
     const response = await fetch(`${API_BASE}/properties/${id}`);
-    if (!response.ok) throw new Error('Failed to fetch property');
+    if (!response.ok) {
+      const error = new Error('Failed to fetch property');
+      error.status = response.status;
+      throw error;
+    }
     return response.json();
   },
 
@@ -25,7 +33,11 @@ export const neonService = {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(property),
     });
-    if (!response.ok) throw new Error('Failed to create property');
+    if (!response.ok) {
+      const error = new Error('Failed to create property');
+      error.status = response.status;
+      throw error;
+    }
     return response.json();
   },
 

@@ -33,26 +33,27 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="py-12 sm:py-16 md:py-20 bg-white">
+    <section id="contact" className="py-12 sm:py-16 md:py-20 lg:py-28 bg-white">
       <div className="container px-4 mx-auto">
-        <div className="text-center mb-12 md:mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 mb-6">
+        <div className="text-center mb-16 sm:mb-20 md:mb-28 max-w-3xl mx-auto">
+          <h2 className="text-4xl sm:text-5xl lg:text-5xl font-bold tracking-tight text-gray-900 mb-8 leading-tight">
             Get in Touch
           </h2>
-          <p className="max-w-2xl mx-auto text-base sm:text-lg text-gray-600 leading-relaxed">
+          <div className="h-2"></div>
+          <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
             Have questions about luxury properties? Our expert team is ready to
             assist you. Contact us today to explore exclusive listings and
             investment opportunities.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 lg:gap-12">
           {contactInfo.map((info, index) => (
             <div
               key={index}
-              className="flex flex-col items-center text-center p-8 bg-white rounded-2xl border border-gray-100 shadow-lg hover:shadow-2xl hover:border-secondary/30 transition-all duration-300 group"
+              className="flex flex-col items-center text-center p-8 sm:p-10 lg:p-12 bg-white rounded-2xl border border-gray-100 shadow-lg hover:shadow-2xl hover:border-secondary/30 transition-all duration-300 group"
             >
-              <div className="mb-6 p-4 rounded-xl bg-secondary/5 group-hover:bg-secondary/10 transition-colors duration-300">
+              <div className="mb-6 p-6 rounded-xl bg-secondary/5 group-hover:bg-secondary/10 transition-colors duration-300 text-secondary">
                 {info.icon}
               </div>
               <h3 className="text-lg font-bold text-gray-900 mb-3 tracking-tight">

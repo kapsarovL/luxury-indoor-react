@@ -1,15 +1,11 @@
 import { createContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import {
-  createUser,
-  getUserByEmail,
-  getUserById,
-  updateUser,
-} from '../db/database';
 import { hashPassword, comparePassword } from '../utils/passwordUtils';
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const AuthContext = createContext();
+
+const STORAGE_KEY = 'luxury_users';
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -22,7 +18,9 @@ export const AuthProvider = ({ children }) => {
       try {
         const storedUserId = localStorage.getItem('userId');
         if (storedUserId) {
-          const userData = await getUserById(storedUserId);
+          const usersData = localStorage.getItem(STORAGE_KEY);
+          const users = usersData ? JSON.parse(usersData) : [];
+          const userData = users.find((u) => u.id === storedUserId);
           if (userData) {
             setUser(userData);
             setIsAuthenticated(true);
@@ -43,17 +41,26 @@ export const AuthProvider = ({ children }) => {
   const signup = async (email, username, password) => {
     try {
       setError(null);
-      const existingUser = await getUserByEmail(email);
+      const usersData = localStorage.getItem(STORAGE_KEY);
+      const users = usersData ? JSON.parse(usersData) : [];
+
+      const existingUser = users.find((u) => u.email === email);
       if (existingUser) {
         throw new Error('Email already registered');
       }
 
       const hashedPassword = await hashPassword(password);
-      const newUser = await createUser({
+      const newUser = {
+        id: Date.now().toString(),
         email,
         username,
         password: hashedPassword,
-      });
+        createdAt: new Date().toISOString(),
+      };
+
+      users.push(newUser);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(users));
+
       setUser(newUser);
       setIsAuthenticated(true);
       localStorage.setItem('userId', newUser.id);
@@ -67,8 +74,10 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password) => {
     try {
       setError(null);
-      const userData = await getUserByEmail(email);
+      const usersData = localStorage.getItem(STORAGE_KEY);
+      const users = usersData ? JSON.parse(usersData) : [];
 
+      const userData = users.find((u) => u.email === email);
       if (!userData) {
         throw new Error('User not found');
       }
@@ -102,8 +111,16 @@ export const AuthProvider = ({ children }) => {
       setError(null);
       if (!user) throw new Error('Not authenticated');
 
-      await updateUser(user.id, updates);
+      const usersData = localStorage.getItem(STORAGE_KEY);
+      const users = usersData ? JSON.parse(usersData) : [];
+      const userIndex = users.findIndex((u) => u.id === user.id);
+
+      if (userIndex === -1) throw new Error('User not found');
+
       const updatedUser = { ...user, ...updates };
+      users[userIndex] = updatedUser;
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(users));
+
       setUser(updatedUser);
       return updatedUser;
     } catch (err) {
