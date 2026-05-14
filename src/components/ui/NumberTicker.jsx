@@ -24,6 +24,8 @@ const NumberTicker = ({ value, suffix = '' }) => {
     if (!isInView) return;
 
     let startTime;
+    let animationFrameId;
+
     const animate = (timestamp) => {
       if (!startTime) startTime = timestamp;
       const progress = Math.min((timestamp - startTime) / duration, 1);
@@ -44,13 +46,19 @@ const NumberTicker = ({ value, suffix = '' }) => {
       }
 
       if (progress < 1) {
-        requestAnimationFrame(animate);
+        animationFrameId = requestAnimationFrame(animate);
       } else {
         setDisplayValue(value);
       }
     };
 
-    requestAnimationFrame(animate);
+    animationFrameId = requestAnimationFrame(animate);
+
+    return () => {
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
+    };
   }, [isInView, value, suffix, numericValue]);
 
   return (
