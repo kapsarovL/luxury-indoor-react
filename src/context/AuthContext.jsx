@@ -1,11 +1,12 @@
 import { createContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { hashPassword, comparePassword } from '../utils/passwordUtils';
+import { neonService } from '../services/neonService';
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const AuthContext = createContext();
 
-const STORAGE_KEY = 'luxury_users';
+const SESSION_KEY = 'userId';
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -16,20 +17,19 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const storedUserId = localStorage.getItem('userId');
+        const storedUserId = sessionStorage.getItem(SESSION_KEY);
         if (storedUserId) {
-          const usersData = localStorage.getItem(STORAGE_KEY);
-          const users = usersData ? JSON.parse(usersData) : [];
-          const userData = users.find((u) => u.id === storedUserId);
+          const userData = await neonService.getUserById(storedUserId);
           if (userData) {
             setUser(userData);
             setIsAuthenticated(true);
           } else {
-            localStorage.removeItem('userId');
+            sessionStorage.removeItem(SESSION_KEY);
           }
         }
       } catch (err) {
         console.error('Auth check error:', err);
+        sessionStorage.removeItem(SESSION_KEY);
       } finally {
         setLoading(false);
       }
@@ -41,29 +41,22 @@ export const AuthProvider = ({ children }) => {
   const signup = async (email, username, password) => {
     try {
       setError(null);
-      const usersData = localStorage.getItem(STORAGE_KEY);
-      const users = usersData ? JSON.parse(usersData) : [];
 
-      const existingUser = users.find((u) => u.email === email);
+      const existingUser = await neonService.getUserByEmail(email);
       if (existingUser) {
         throw new Error('Email already registered');
       }
 
       const hashedPassword = await hashPassword(password);
-      const newUser = {
-        id: Date.now().toString(),
+      const newUser = await neonService.createUser({
         email,
         username,
         password: hashedPassword,
-        createdAt: new Date().toISOString(),
-      };
-
-      users.push(newUser);
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(users));
+      });
 
       setUser(newUser);
       setIsAuthenticated(true);
-      localStorage.setItem('userId', newUser.id);
+      sessionStorage.setItem(SESSION_KEY, newUser.id);
       return newUser;
     } catch (err) {
       setError(err.message);
@@ -74,10 +67,8 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password) => {
     try {
       setError(null);
-      const usersData = localStorage.getItem(STORAGE_KEY);
-      const users = usersData ? JSON.parse(usersData) : [];
 
-      const userData = users.find((u) => u.email === email);
+      const userData = await neonService.getUserByEmail(email);
       if (!userData) {
         throw new Error('User not found');
       }
@@ -92,7 +83,7 @@ export const AuthProvider = ({ children }) => {
 
       setUser(userData);
       setIsAuthenticated(true);
-      localStorage.setItem('userId', userData.id);
+      sessionStorage.setItem(SESSION_KEY, userData.id);
       return userData;
     } catch (err) {
       setError(err.message);
@@ -103,7 +94,7 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     setUser(null);
     setIsAuthenticated(false);
-    localStorage.removeItem('userId');
+    sessionStorage.removeItem(SESSION_KEY);
   };
 
   const updateProfile = async (updates) => {
@@ -111,15 +102,8 @@ export const AuthProvider = ({ children }) => {
       setError(null);
       if (!user) throw new Error('Not authenticated');
 
-      const usersData = localStorage.getItem(STORAGE_KEY);
-      const users = usersData ? JSON.parse(usersData) : [];
-      const userIndex = users.findIndex((u) => u.id === user.id);
-
-      if (userIndex === -1) throw new Error('User not found');
-
-      const updatedUser = { ...user, ...updates };
-      users[userIndex] = updatedUser;
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(users));
+      const updatedUser = await neonService.updateUser(user.id, updates);
+      if (!updatedUser) throw new Error('User not found');
 
       setUser(updatedUser);
       return updatedUser;
