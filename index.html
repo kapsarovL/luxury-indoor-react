@@ -7,11 +7,19 @@
     <!-- Preconnect to font origins for faster loading -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <!-- Google Fonts -->
+    <!-- Google Fonts (non-blocking) -->
     <link
       href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Playfair+Display:wght@400;700&display=swap"
       rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
     />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Playfair+Display:wght@400;700&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
 
     <title>Luxury Estate - Premium Real Estate Properties</title>
     <meta
