@@ -1,12 +1,23 @@
 import { useState, useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
 import { useInView } from 'framer-motion';
 
 const NumberTicker = ({ value, suffix = '' }) => {
+  if (typeof value !== 'string' || !value) {
+    console.error('NumberTicker: value prop must be a non-empty string');
+    return <span className="inline-block">{value || '0'}</span>;
+  }
+
   const [displayValue, setDisplayValue] = useState(0);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
 
   const numericValue = parseInt(value.replace(/[^0-9]/g, ''), 10);
+
+  if (isNaN(numericValue)) {
+    return <span className="inline-block">{value}</span>;
+  }
+
   const duration = 2000;
 
   useEffect(() => {
@@ -47,6 +58,11 @@ const NumberTicker = ({ value, suffix = '' }) => {
       {displayValue}
     </span>
   );
+};
+
+NumberTicker.propTypes = {
+  value: PropTypes.string.isRequired,
+  suffix: PropTypes.string,
 };
 
 export default NumberTicker;
