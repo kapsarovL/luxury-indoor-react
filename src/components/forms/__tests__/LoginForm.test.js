@@ -3,7 +3,6 @@ import {
   screen,
   fireEvent,
   waitFor,
-  act,
 } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import LoginForm from '../LoginForm';
@@ -145,11 +144,9 @@ describe('LoginForm', () => {
     const passwordInput = screen.getByPlaceholderText('Password');
     const submitButton = screen.getByRole('button', { name: /sign in/i });
 
-    await act(async () => {
-      fireEvent.change(emailInput, { target: { value: 'test@example.com' } });
-      fireEvent.change(passwordInput, { target: { value: 'password123' } });
-      fireEvent.click(submitButton);
-    });
+    fireEvent.change(emailInput, { target: { value: 'test@example.com' } });
+    fireEvent.change(passwordInput, { target: { value: 'password123' } });
+    fireEvent.click(submitButton);
 
     await waitFor(() => {
       expect(
@@ -208,11 +205,9 @@ describe('LoginForm', () => {
     const passwordInput = screen.getByPlaceholderText('Password');
     const submitButton = screen.getByRole('button', { name: /sign in/i });
 
-    await act(async () => {
-      fireEvent.change(emailInput, { target: { value: 'test@example.com' } });
-      fireEvent.change(passwordInput, { target: { value: 'password123' } });
-      fireEvent.click(submitButton);
-    });
+    fireEvent.change(emailInput, { target: { value: 'test@example.com' } });
+    fireEvent.change(passwordInput, { target: { value: 'password123' } });
+    fireEvent.click(submitButton);
 
     await waitFor(() => {
       expect(submitButton).toBeDisabled();
