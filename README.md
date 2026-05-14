@@ -2,6 +2,8 @@
 
 Property browsing platform for high-end real estate listings with component-driven architecture and responsive design.
 
+![Luxury Indoor React](./public/facebook-og-image.png)
+
 ---
 
 ## Context
