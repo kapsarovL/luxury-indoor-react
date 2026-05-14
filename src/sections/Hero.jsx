@@ -10,9 +10,7 @@ const Hero = () => {
   const { success } = useToast();
 
   const handleExploreClick = () => {
-    console.log('Button clicked, triggering toast');
-    success('Loading properties...');
-    console.log('Toast triggered');
+    success('Scrolling to properties...');
     const propertiesSection = document.getElementById('properties');
     if (propertiesSection) {
       propertiesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });

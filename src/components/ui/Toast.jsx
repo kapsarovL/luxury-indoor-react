@@ -32,7 +32,6 @@ const iconColorMap = {
 
 export const ToastContainer = () => {
   const { toasts, removeToast } = useContext(ToastContext);
-  console.log('ToastContainer rendering, toasts:', toasts);
 
   return (
     <div className="fixed top-0 left-0 right-0 z-50 flex flex-col gap-0 pointer-events-none w-full">
