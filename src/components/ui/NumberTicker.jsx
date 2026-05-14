@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import { useInView } from 'framer-motion';
 
 const NumberTicker = ({ value, suffix = '' }) => {
+  const [displayValue, setDisplayValue] = useState('0');
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+
   if (typeof value !== 'string' || !value) {
     console.error('NumberTicker: value prop must be a non-empty string');
     return <span className="inline-block">{value || '0'}</span>;
   }
-
-  const [displayValue, setDisplayValue] = useState('0');
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
 
   const numericValue = parseInt(value.replace(/[^0-9]/g, ''), 10);
 
