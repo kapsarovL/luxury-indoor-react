@@ -70,7 +70,7 @@ const TeamSection = () => {
     <section id="team" className="py-12 sm:py-16 md:py-20 lg:py-28 bg-white">
       <div className="container px-4 mx-auto">
         <div className="text-center mb-16 sm:mb-20 md:mb-28 max-w-3xl mx-auto">
-          <p className="text-secondary text-xs sm:text-sm font-bold uppercase tracking-[0.2em] mb-4">
+          <p className="text-secondary-dark text-xs sm:text-sm font-bold uppercase tracking-[0.2em] mb-4">
             Meet the Professionals
           </p>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 mb-6 leading-tight">
@@ -107,7 +107,7 @@ const TeamSection = () => {
                   <h3 className="text-lg font-bold text-gray-900 tracking-tight mb-2">
                     {agent.name}
                   </h3>
-                  <p className="text-sm font-semibold uppercase tracking-wider text-secondary">
+                  <p className="text-sm font-semibold uppercase tracking-wider text-secondary-dark">
                     {agent.role}
                   </p>
                 </div>

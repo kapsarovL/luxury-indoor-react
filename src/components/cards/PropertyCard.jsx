@@ -60,14 +60,14 @@ const PropertyCard = ({ property }) => {
       {/* Property Details */}
       <div className="p-6 space-y-4">
         <div>
-          <h4 className="mb-2 text-lg font-bold text-gray-900 tracking-tight line-clamp-2">
+          <h3 className="mb-2 text-lg font-bold text-gray-900 tracking-tight line-clamp-2">
             {property.title}
-          </h4>
+          </h3>
           <p className="text-sm text-gray-600">{property.location}</p>
         </div>
 
         <div className="border-t border-gray-100 pt-4">
-          <p className="text-xl font-bold text-secondary">{property.price}</p>
+          <p className="text-xl font-bold text-secondary-dark">{property.price}</p>
         </div>
 
         {/* Property Features */}

@@ -147,9 +147,9 @@ const SubscribeSection = () => {
                       {benefit.icon}
                     </div>
                     <div>
-                      <h4 className="font-semibold text-white text-sm mb-1">
+                      <h3 className="font-semibold text-white text-sm mb-1">
                         {benefit.title}
-                      </h4>
+                      </h3>
                       <p className="text-xs text-gray-400 leading-relaxed">
                         {benefit.description}
                       </p>

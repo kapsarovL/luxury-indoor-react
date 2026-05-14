@@ -11,6 +11,7 @@ export default {
         snow: '#fffafa', // Snow White
         primary: 'hsl(224, 64%, 33%)', // Dark Blue
         secondary: 'hsl(43, 96%, 56%)', // Amber
+        'secondary-dark': 'hsl(43, 100%, 25%)', // Dark Amber (for text on light backgrounds)
         accent: 'hsl(160, 84%, 39%)', // Emerald
         red: 'hsl(0, 96%, 47%)', // Red
 

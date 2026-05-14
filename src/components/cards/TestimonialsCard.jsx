@@ -41,10 +41,10 @@ const TestimonialsCard = ({ image, name, rating, feedback }) => {
           className="rounded-full object-cover w-16 h-16 border-2 border-secondary/20"
         />
         <div className="text-center">
-          <h5 className="text-lg font-bold text-gray-900 tracking-tight">
+          <h3 className="text-lg font-bold text-gray-900 tracking-tight">
             {name}
-          </h5>
-          <p className="text-xs font-semibold uppercase tracking-widest text-secondary mt-1">
+          </h3>
+          <p className="text-xs font-semibold uppercase tracking-widest text-secondary-dark mt-1">
             Verified Customer
           </p>
         </div>

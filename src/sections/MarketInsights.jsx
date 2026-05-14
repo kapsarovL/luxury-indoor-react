@@ -80,7 +80,7 @@ const MarketInsights = () => {
       <div className="container px-4 mx-auto">
         {/* Header */}
         <div className="text-center mb-16 sm:mb-20 md:mb-28 max-w-3xl mx-auto">
-          <p className="text-secondary text-xs sm:text-sm font-bold uppercase tracking-[0.2em] mb-4">
+          <p className="text-secondary-dark text-xs sm:text-sm font-bold uppercase tracking-[0.2em] mb-4">
             Market Analysis
           </p>
           <h2 className="text-4xl sm:text-5xl lg:text-5xl font-bold tracking-tight text-gray-900 mb-8 leading-tight">
@@ -107,7 +107,7 @@ const MarketInsights = () => {
               <p className="text-xs uppercase tracking-wider text-gray-600 mb-3 font-semibold">
                 {insight.metric}
               </p>
-              <p className="text-5xl sm:text-6xl lg:text-7xl font-bold text-secondary mb-5 leading-tight">
+              <p className="text-5xl sm:text-6xl lg:text-7xl font-bold text-secondary-dark mb-5 leading-tight">
                 {insight.value}
               </p>
               <p className="text-sm md:text-base text-gray-600 leading-relaxed">
@@ -129,10 +129,10 @@ const MarketInsights = () => {
                 className="p-6 border border-gray-100 rounded-xl hover:border-secondary/30 hover:shadow-lg transition-all duration-300"
               >
                 <div className="flex items-center justify-between mb-4">
-                  <h4 className="text-lg font-bold text-gray-900">
+                  <h3 className="text-lg font-bold text-gray-900">
                     {market.city}
-                  </h4>
-                  <span className="text-lg font-bold text-secondary">
+                  </h3>
+                  <span className="text-lg font-bold text-secondary-dark">
                     {market.growth}
                   </span>
                 </div>

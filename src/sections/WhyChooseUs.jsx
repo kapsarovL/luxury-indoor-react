@@ -45,7 +45,7 @@ const WhyChooseUs = () => {
     >
       <div className="container px-4 mx-auto">
         <div className="text-center mb-16 sm:mb-20 md:mb-28 max-w-3xl mx-auto">
-          <p className="text-secondary text-xs sm:text-sm font-bold uppercase tracking-[0.2em] mb-4 letter-spacing-wide">
+          <p className="text-secondary-dark text-xs sm:text-sm font-bold uppercase tracking-[0.2em] mb-4 letter-spacing-wide">
             Why We Stand Out
           </p>
           <h2 className="text-4xl sm:text-5xl lg:text-5xl font-bold tracking-tight text-gray-900 mb-8 leading-tight">

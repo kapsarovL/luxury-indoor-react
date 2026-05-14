@@ -26,7 +26,7 @@ const InvestmentCalculatorSection = () => {
       <div className="container px-4 mx-auto">
         {/* Header */}
         <div className="text-center mb-16 sm:mb-20 md:mb-28 max-w-3xl mx-auto">
-          <p className="text-secondary text-xs sm:text-sm font-bold uppercase tracking-[0.2em] mb-4">
+          <p className="text-secondary-dark text-xs sm:text-sm font-bold uppercase tracking-[0.2em] mb-4">
             Financial Planning
           </p>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 mb-6 leading-tight">
@@ -253,10 +253,10 @@ const InvestmentCalculatorSection = () => {
                   </div>
 
                   <div className="p-6 rounded-lg bg-secondary/5 border border-secondary/20">
-                    <p className="text-xs uppercase tracking-wider text-secondary font-semibold mb-2">
+                    <p className="text-xs uppercase tracking-wider text-secondary-dark font-semibold mb-2">
                       Annual Return
                     </p>
-                    <p className="text-2xl font-bold text-secondary">
+                    <p className="text-2xl font-bold text-secondary-dark">
                       $
                       {annualReturn.toLocaleString('en-US', {
                         minimumFractionDigits: 0,
@@ -265,10 +265,10 @@ const InvestmentCalculatorSection = () => {
                   </div>
 
                   <div className="p-6 rounded-lg bg-secondary/5 border border-secondary/20">
-                    <p className="text-xs uppercase tracking-wider text-secondary font-semibold mb-2">
+                    <p className="text-xs uppercase tracking-wider text-secondary-dark font-semibold mb-2">
                       Total Profit ({investmentYears} years)
                     </p>
-                    <p className="text-2xl font-bold text-secondary">
+                    <p className="text-2xl font-bold text-secondary-dark">
                       $
                       {totalReturn.toLocaleString('en-US', {
                         minimumFractionDigits: 0,
@@ -301,7 +301,7 @@ const InvestmentCalculatorSection = () => {
                     <span className="text-sm font-semibold text-gray-600">
                       Profit Margin
                     </span>
-                    <span className="text-xl font-bold text-secondary flex-shrink-0">
+                    <span className="text-xl font-bold text-secondary-dark flex-shrink-0">
                       {profitMargin.toFixed(1)}%
                     </span>
                   </div>
