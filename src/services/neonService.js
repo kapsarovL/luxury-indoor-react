@@ -5,10 +5,38 @@ const API_BASE =
   (typeof process !== 'undefined' && process.env?.VITE_API_URL) ||
   'http://localhost:3001/api';
 
+const isLocalAddress = (url) => {
+  try {
+    const urlObj = new URL(url);
+    const hostname = urlObj.hostname;
+    return (
+      hostname === 'localhost' ||
+      hostname === '127.0.0.1' ||
+      hostname.endsWith('.local') ||
+      hostname.startsWith('192.168.') ||
+      hostname.startsWith('10.') ||
+      hostname.startsWith('172.')
+    );
+  } catch {
+    return false;
+  }
+};
+
+const getFetchOptions = (url, options = {}) => {
+  if (isLocalAddress(url)) {
+    return {
+      ...options,
+      targetAddressSpace: 'local',
+    };
+  }
+  return options;
+};
+
 export const neonService = {
   // Properties
   async getProperties() {
-    const response = await fetch(`${API_BASE}/properties`);
+    const url = `${API_BASE}/properties`;
+    const response = await fetch(url, getFetchOptions(url));
     if (!response.ok) {
       const error = new Error('Failed to fetch properties');
       error.status = response.status;
@@ -18,7 +46,8 @@ export const neonService = {
   },
 
   async getPropertyById(id) {
-    const response = await fetch(`${API_BASE}/properties/${id}`);
+    const url = `${API_BASE}/properties/${id}`;
+    const response = await fetch(url, getFetchOptions(url));
     if (!response.ok) {
       const error = new Error('Failed to fetch property');
       error.status = response.status;
@@ -28,11 +57,12 @@ export const neonService = {
   },
 
   async createProperty(property) {
-    const response = await fetch(`${API_BASE}/properties`, {
+    const url = `${API_BASE}/properties`;
+    const response = await fetch(url, getFetchOptions(url, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(property),
-    });
+    }));
     if (!response.ok) {
       const error = new Error('Failed to create property');
       error.status = response.status;
@@ -42,120 +72,127 @@ export const neonService = {
   },
 
   async updateProperty(id, updates) {
-    const response = await fetch(`${API_BASE}/properties/${id}`, {
+    const url = `${API_BASE}/properties/${id}`;
+    const response = await fetch(url, getFetchOptions(url, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(updates),
-    });
+    }));
     if (!response.ok) throw new Error('Failed to update property');
     return response.json();
   },
 
   async deleteProperty(id) {
-    const response = await fetch(`${API_BASE}/properties/${id}`, {
+    const url = `${API_BASE}/properties/${id}`;
+    const response = await fetch(url, getFetchOptions(url, {
       method: 'DELETE',
-    });
+    }));
     if (!response.ok) throw new Error('Failed to delete property');
     return response.json();
   },
 
   // Users
   async createUser(userData) {
-    const response = await fetch(`${API_BASE}/users`, {
+    const url = `${API_BASE}/users`;
+    const response = await fetch(url, getFetchOptions(url, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(userData),
-    });
+    }));
     if (!response.ok) throw new Error('Failed to create user');
     return response.json();
   },
 
   async getUserByEmail(email) {
-    const response = await fetch(
-      `${API_BASE}/users/email/${encodeURIComponent(email)}`
-    );
+    const url = `${API_BASE}/users/email/${encodeURIComponent(email)}`;
+    const response = await fetch(url, getFetchOptions(url));
     if (!response.ok) return null;
     return response.json();
   },
 
   async getUserByUsername(username) {
-    const response = await fetch(
-      `${API_BASE}/users/username/${encodeURIComponent(username)}`
-    );
+    const url = `${API_BASE}/users/username/${encodeURIComponent(username)}`;
+    const response = await fetch(url, getFetchOptions(url));
     if (!response.ok) return null;
     return response.json();
   },
 
   async getUserById(id) {
-    const response = await fetch(`${API_BASE}/users/${id}`);
+    const url = `${API_BASE}/users/${id}`;
+    const response = await fetch(url, getFetchOptions(url));
     if (!response.ok) return null;
     return response.json();
   },
 
   async updateUser(id, updates) {
-    const response = await fetch(`${API_BASE}/users/${id}`, {
+    const url = `${API_BASE}/users/${id}`;
+    const response = await fetch(url, getFetchOptions(url, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(updates),
-    });
+    }));
     if (!response.ok) throw new Error('Failed to update user');
     return response.json();
   },
 
   async deleteUser(id) {
-    const response = await fetch(`${API_BASE}/users/${id}`, {
+    const url = `${API_BASE}/users/${id}`;
+    const response = await fetch(url, getFetchOptions(url, {
       method: 'DELETE',
-    });
+    }));
     if (!response.ok) throw new Error('Failed to delete user');
     return response.json();
   },
 
   // Subscriptions
   async subscribeEmail(subscriptionData) {
-    const response = await fetch(`${API_BASE}/subscriptions`, {
+    const url = `${API_BASE}/subscriptions`;
+    const response = await fetch(url, getFetchOptions(url, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(subscriptionData),
-    });
+    }));
     if (!response.ok) throw new Error('Failed to subscribe');
     return response.json();
   },
 
   async getSubscriptionByEmail(email) {
-    const response = await fetch(
-      `${API_BASE}/subscriptions/email/${encodeURIComponent(email)}`
-    );
+    const url = `${API_BASE}/subscriptions/email/${encodeURIComponent(email)}`;
+    const response = await fetch(url, getFetchOptions(url));
     if (!response.ok) return null;
     return response.json();
   },
 
   async getAllSubscriptions() {
-    const response = await fetch(`${API_BASE}/subscriptions`);
+    const url = `${API_BASE}/subscriptions`;
+    const response = await fetch(url, getFetchOptions(url));
     if (!response.ok) return [];
     return response.json();
   },
 
   async updateSubscription(id, updates) {
-    const response = await fetch(`${API_BASE}/subscriptions/${id}`, {
+    const url = `${API_BASE}/subscriptions/${id}`;
+    const response = await fetch(url, getFetchOptions(url, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(updates),
-    });
+    }));
     if (!response.ok) throw new Error('Failed to update subscription');
     return response.json();
   },
 
   async deleteSubscription(id) {
-    const response = await fetch(`${API_BASE}/subscriptions/${id}`, {
+    const url = `${API_BASE}/subscriptions/${id}`;
+    const response = await fetch(url, getFetchOptions(url, {
       method: 'DELETE',
-    });
+    }));
     if (!response.ok) throw new Error('Failed to delete subscription');
     return response.json();
   },
 
   async unsubscribeEmail(email) {
     const url = `${API_BASE}/subscriptions/email/${encodeURIComponent(email)}`;
-    const response = await fetch(url, { method: 'DELETE' });
+    const response = await fetch(url, getFetchOptions(url, { method: 'DELETE' }));
     if (!response.ok) throw new Error('Failed to unsubscribe');
     return response.json();
   },
