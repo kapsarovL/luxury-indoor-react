@@ -12,13 +12,15 @@
           "value": "nosniff"
         }
       ]
-    }
-  ],
-  "redirects": [
+    },
     {
       "source": "/robots.txt",
-      "destination": "/robots.txt",
-      "permanent": true
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/plain"
+        }
+      ]
     }
   ]
 }
