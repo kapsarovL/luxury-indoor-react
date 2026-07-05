@@ -37,6 +37,9 @@
     "tailwind-merge": "^2.5.3",
     "zod": "^4.4.3"
   },
+  "overrides": {
+    "@babel/core": "7.29.6"
+  },
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.29.0",
     "@babel/preset-env": "^7.29.5",
