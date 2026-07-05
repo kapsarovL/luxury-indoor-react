@@ -21,6 +21,10 @@
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1"
   },
+  "overrides": {
+    "qs": "6.15.2",
+    "js-yaml": "3.15.0"
+  },
   "devDependencies": {
     "jest": "^29.7.0",
     "nodemon": "^3.0.1",
