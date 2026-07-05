@@ -25,7 +25,8 @@ describe('neonService', () => {
 
       expect(result).toEqual(mockProperties);
       expect(global.fetch).toHaveBeenCalledWith(
-        expect.stringContaining('/api/properties')
+        expect.stringContaining('/api/properties'),
+        expect.any(Object)
       );
     });
 
@@ -51,7 +52,8 @@ describe('neonService', () => {
 
       expect(result).toEqual(mockProperty);
       expect(global.fetch).toHaveBeenCalledWith(
-        expect.stringContaining('/api/properties/1')
+        expect.stringContaining('/api/properties/1'),
+        expect.any(Object)
       );
     });
 
@@ -138,7 +140,8 @@ describe('neonService', () => {
 
       expect(result).toEqual(mockResponse);
       expect(global.fetch).toHaveBeenCalledWith(
-        expect.stringContaining('/api/subscriptions/email/test%40example.com')
+        expect.stringContaining('/api/subscriptions/email/test%40example.com'),
+        expect.any(Object)
       );
     });
 
@@ -174,7 +177,8 @@ describe('neonService', () => {
 
       expect(result).toEqual(mockResponse);
       expect(global.fetch).toHaveBeenCalledWith(
-        expect.stringContaining('/api/subscriptions')
+        expect.stringContaining('/api/subscriptions'),
+        expect.any(Object)
       );
     });
   });

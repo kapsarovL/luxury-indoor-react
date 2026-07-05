@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { hashPassword, comparePassword } from '../utils/passwordUtils';
+import { comparePassword } from '../utils/passwordUtils';
 import { neonService } from '../services/neonService';
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -47,11 +47,10 @@ export const AuthProvider = ({ children }) => {
         throw new Error('Email already registered');
       }
 
-      const hashedPassword = await hashPassword(password);
       const newUser = await neonService.createUser({
         email,
         username,
-        password: hashedPassword,
+        password,
       });
 
       setUser(newUser);

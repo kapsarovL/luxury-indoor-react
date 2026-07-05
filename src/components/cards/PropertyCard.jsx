@@ -9,7 +9,6 @@ import {
   FaHeart,
   FaRegHeart,
 } from 'react-icons/fa';
-import { properties } from '../../data/propertyData';
 
 const PropertyCard = ({ property }) => {
   const [isFavorited, setIsFavorited] = useState(false);
@@ -40,10 +39,7 @@ const PropertyCard = ({ property }) => {
       </button>
 
       {/* Property Image */}
-      <div
-        key={properties}
-        className="max-container overflow-hidden bg-gray-100"
-      >
+      <div className="max-container overflow-hidden bg-gray-100">
         <img
           src={
             property.imgURL ||
@@ -67,7 +63,9 @@ const PropertyCard = ({ property }) => {
         </div>
 
         <div className="border-t border-gray-100 pt-4">
-          <p className="text-xl font-bold text-secondary-dark">{property.price}</p>
+          <p className="text-xl font-bold text-secondary-dark">
+            {property.price}
+          </p>
         </div>
 
         {/* Property Features */}

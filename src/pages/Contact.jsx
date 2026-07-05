@@ -8,25 +8,40 @@ const Contact = () => {
     email: '',
     message: '',
   });
-  const [error, setError] = useState('');
+  const [fieldErrors, setFieldErrors] = useState({});
+
+  const validate = () => {
+    const errors = {};
+    if (!isRequired(formData.name)) {
+      errors.name = 'Name is required';
+    }
+    if (!isRequired(formData.email)) {
+      errors.email = 'Email is required';
+    } else if (!isValidEmail(formData.email)) {
+      errors.email = 'Invalid email address';
+    }
+    if (!isRequired(formData.message)) {
+      errors.message = 'Message is required';
+    }
+    setFieldErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!isRequired(formData.name)) {
-      setError('Name is required');
-      return;
-    }
-    if (!isRequired(formData.email)) {
-      setError('Email is required');
-      return;
-    }
-    if (!isValidEmail(formData.email)) {
-      setError('Invalid email address');
-      return;
-    }
-    // Handle form submission
-    setError('');
+    if (!validate()) return;
     console.log('Form submitted', formData);
+  };
+
+  const handleChange = (field, value) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+    if (fieldErrors[field]) {
+      setFieldErrors((prev) => {
+        const next = { ...prev };
+        delete next[field];
+        return next;
+      });
+    }
   };
 
   return (
@@ -37,48 +52,75 @@ const Contact = () => {
         </h2>
         <form onSubmit={handleSubmit} className="max-w-2xl mx-auto space-y-6">
           <div>
-            <label className="block text-gray-700">Name</label>
+            <label htmlFor="contact-name" className="block text-gray-700">
+              Name
+            </label>
             <input
+              id="contact-name"
               type="text"
               autoComplete="name"
               className="block w-full mt-1 border-gray-300 rounded-md shadow-sm"
               value={formData.name}
-              onChange={(e) =>
-                setFormData({ ...formData, email: e.target.value })
-              }
+              onChange={(e) => handleChange('name', e.target.value)}
               placeholder="Enter your name"
               required
             />
-            {error && <p className="text-red-500">{error}</p>}
+            {fieldErrors.name && (
+              <p
+                id="contact-name-error"
+                className="mt-1 text-sm text-red-500"
+                role="alert"
+              >
+                {fieldErrors.name}
+              </p>
+            )}
           </div>
           <div>
-            <label className="block text-gray-700">Email</label>
+            <label htmlFor="contact-email" className="block text-gray-700">
+              Email
+            </label>
             <input
+              id="contact-email"
               type="email"
               autoComplete="email"
               className="block w-full mt-1 border-gray-300 rounded-md shadow-sm"
               value={formData.email}
-              onChange={(e) =>
-                setFormData({ ...formData, email: e.target.value })
-              }
+              onChange={(e) => handleChange('email', e.target.value)}
               placeholder="Enter your email"
               required
             />
-            {error && <p className="text-red-500">{error}</p>}
+            {fieldErrors.email && (
+              <p
+                id="contact-email-error"
+                className="mt-1 text-sm text-red-500"
+                role="alert"
+              >
+                {fieldErrors.email}
+              </p>
+            )}
           </div>
           <div>
-            <label className="block text-gray-700">Message</label>
+            <label htmlFor="contact-message" className="block text-gray-700">
+              Message
+            </label>
             <textarea
+              id="contact-message"
               autoComplete="off"
               className="block w-full mt-1 border-gray-300 rounded-md shadow-sm"
               rows="5"
               value={formData.message}
-              onChange={(e) =>
-                setFormData({ ...formData, message: e.target.value })
-              }
+              onChange={(e) => handleChange('message', e.target.value)}
               required
             ></textarea>
-            {error && <p className="text-red-500">{error}</p>}
+            {fieldErrors.message && (
+              <p
+                id="contact-message-error"
+                className="mt-1 text-sm text-red-500"
+                role="alert"
+              >
+                {fieldErrors.message}
+              </p>
+            )}
           </div>
           <button
             type="submit"

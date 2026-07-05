@@ -1,63 +1,99 @@
+import { useContext } from 'react';
 import { renderHook, act } from '@testing-library/react';
 import {
   SubscriptionProvider,
   SubscriptionContext,
 } from '../SubscriptionContext';
-import * as database from '../../db/database';
 
-jest.mock('../../db/database');
-
-const wrapper = ({ children }) => (
-  <SubscriptionProvider>{children}</SubscriptionProvider>
-);
+const useSubscription = () => useContext(SubscriptionContext);
 
 describe('SubscriptionContext', () => {
   beforeEach(() => {
+    localStorage.clear();
     jest.clearAllMocks();
   });
 
-  it('should subscribe an email successfully', async () => {
-    const mockSubscription = {
-      id: 1,
-      email: 'test@example.com',
-      created_at: '2026-05-13T00:00:00Z',
-      updated_at: '2026-05-13T00:00:00Z',
-    };
+  const wrapper = ({ children }) => (
+    <SubscriptionProvider>{children}</SubscriptionProvider>
+  );
 
-    database.getSubscriptionByEmail.mockResolvedValue(null);
-    database.subscribeEmail.mockResolvedValue(mockSubscription);
+  const renderWithContext = () =>
+    renderHook(() => useSubscription(), { wrapper });
 
-    renderHook(() => SubscriptionContext, { wrapper });
+  it('should provide context with initial empty state', () => {
+    const { result } = renderWithContext();
+    const { loading, error, subscribedEmails, isSubscribed } = result.current;
 
-    act(() => {
-      // The hook needs to be called differently
-    });
-
-    // Note: SubscriptionContext is a context, not a hook
-    // This test demonstrates the pattern but needs adjustment
-    expect(database.subscribeEmail).not.toHaveBeenCalled();
+    expect(loading).toBe(false);
+    expect(error).toBe(null);
+    expect(subscribedEmails).toBeInstanceOf(Set);
+    expect(subscribedEmails.size).toBe(0);
+    expect(isSubscribed('test@example.com')).toBe(false);
   });
 
-  it('should prevent duplicate subscriptions', async () => {
-    const existingSubscription = {
-      id: 1,
-      email: 'test@example.com',
-      created_at: '2026-05-13T00:00:00Z',
-    };
+  it('should subscribe an email successfully', async () => {
+    const { result } = renderWithContext();
 
-    database.getSubscriptionByEmail.mockResolvedValue(existingSubscription);
+    await act(async () => {
+      const res = await result.current.subscribe({
+        email: 'test@example.com',
+      });
+      expect(res).toEqual({ email: 'test@example.com' });
+    });
 
-    // Verify duplicate check exists
-    expect(database.getSubscriptionByEmail).not.toHaveBeenCalled();
+    expect(result.current.isSubscribed('test@example.com')).toBe(true);
+    expect(result.current.error).toBe(null);
+  });
+
+  it('should reject duplicate subscriptions', async () => {
+    const { result } = renderWithContext();
+
+    await act(async () => {
+      await result.current.subscribe({ email: 'test@example.com' });
+    });
+
+    await act(async () => {
+      await expect(
+        result.current.subscribe({ email: 'test@example.com' })
+      ).rejects.toThrow('Email already subscribed');
+    });
+
+    expect(result.current.error).toBe('Email already subscribed');
   });
 
   it('should unsubscribe an email', async () => {
-    database.unsubscribeEmail.mockResolvedValue({
-      id: 1,
-      email: 'test@example.com',
+    const { result } = renderWithContext();
+
+    await act(async () => {
+      await result.current.subscribe({ email: 'test@example.com' });
     });
 
-    // Unsubscribe test
-    expect(database.unsubscribeEmail).not.toHaveBeenCalled();
+    await act(async () => {
+      await result.current.unsubscribe('test@example.com');
+    });
+
+    expect(result.current.isSubscribed('test@example.com')).toBe(false);
+  });
+
+  it('should persist subscriptions to localStorage', async () => {
+    const { result } = renderWithContext();
+
+    await act(async () => {
+      await result.current.subscribe({ email: 'test@example.com' });
+    });
+
+    const stored = JSON.parse(
+      localStorage.getItem('luxury_subscriptions') || '[]'
+    );
+    expect(stored).toEqual(['test@example.com']);
+
+    await act(async () => {
+      await result.current.unsubscribe('test@example.com');
+    });
+
+    const storedAfter = JSON.parse(
+      localStorage.getItem('luxury_subscriptions') || '[]'
+    );
+    expect(storedAfter).toEqual([]);
   });
 });

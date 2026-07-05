@@ -15,6 +15,7 @@ const PropertyDetails = lazy(() => import('../pages/PropertyDetails'));
 const NotFound = lazy(() => import('../pages/NotFound'));
 const LoginForm = lazy(() => import('../components/forms/LoginForm'));
 const SignupForm = lazy(() => import('../components/forms/SignupForm'));
+const Contact = lazy(() => import('../pages/Contact'));
 
 const LoadingFallback = () => (
   <div className="flex items-center justify-center min-h-screen">
@@ -32,50 +33,58 @@ function App() {
     <AuthProvider>
       <SubscriptionProvider>
         <ToastProvider>
-            <Router>
-              <ScrollToTop />
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route
-                  path="/property/:id"
-                  element={
-                    <Suspense fallback={<LoadingFallback />}>
-                      <PropertyDetails />
-                    </Suspense>
-                  }
-                />
-                <Route
-                  path="/login"
-                  element={
-                    <Suspense fallback={<LoadingFallback />}>
-                      <LoginForm />
-                    </Suspense>
-                  }
-                />
-                <Route
-                  path="/signup"
-                  element={
-                    <Suspense fallback={<LoadingFallback />}>
-                      <SignupForm />
-                    </Suspense>
-                  }
-                />
-                <Route
-                  path="*"
-                  element={
-                    <Suspense fallback={<LoadingFallback />}>
-                      <NotFound />
-                    </Suspense>
-                  }
-                />
-              </Routes>
-              <Footer />
-            </Router>
-            <ToastContainer />
-          </ToastProvider>
-        </SubscriptionProvider>
-      </AuthProvider>
-    );
+          <Router>
+            <ScrollToTop />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route
+                path="/property/:id"
+                element={
+                  <Suspense fallback={<LoadingFallback />}>
+                    <PropertyDetails />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="/login"
+                element={
+                  <Suspense fallback={<LoadingFallback />}>
+                    <LoginForm />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="/signup"
+                element={
+                  <Suspense fallback={<LoadingFallback />}>
+                    <SignupForm />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="/contact"
+                element={
+                  <Suspense fallback={<LoadingFallback />}>
+                    <Contact />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="*"
+                element={
+                  <Suspense fallback={<LoadingFallback />}>
+                    <NotFound />
+                  </Suspense>
+                }
+              />
+            </Routes>
+            <Footer />
+          </Router>
+          <ToastContainer />
+        </ToastProvider>
+      </SubscriptionProvider>
+    </AuthProvider>
+  );
 }
 
 export default App;

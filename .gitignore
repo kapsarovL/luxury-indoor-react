@@ -29,3 +29,7 @@ dist-ssr
 *.sw?
 /docs/
 .vercel
+
+/context
+AGENTS.md
+CLAUDE.md
