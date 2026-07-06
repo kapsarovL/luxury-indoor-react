@@ -15,6 +15,10 @@ updates:
         versions: ['>=8.0.0']
       - dependency-name: 'eslint-config-prettier'
         versions: ['>=10.0.0']
+      - dependency-name: 'globals'
+        versions: ['>=17.0.0']
+      - dependency-name: '@eslint/js'
+        versions: ['>=10.0.0']
 
   - package-ecosystem: 'npm'
     directory: '/server'
@@ -35,3 +39,5 @@ updates:
         versions: ['>=17.0.0']
       - dependency-name: 'bcryptjs'
         versions: ['>=3.0.0']
+      - dependency-name: 'supertest'
+        versions: ['>=7.0.0']
