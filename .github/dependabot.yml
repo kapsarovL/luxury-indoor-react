@@ -9,6 +9,12 @@ updates:
         versions: ['<4.2.0']
       - dependency-name: '@babel/core'
         versions: ['<7.29.6']
+      - dependency-name: 'react-router-dom'
+        versions: ['>=7.0.0']
+      - dependency-name: '@babel/preset-react'
+        versions: ['>=8.0.0']
+      - dependency-name: 'eslint-config-prettier'
+        versions: ['>=10.0.0']
 
   - package-ecosystem: 'npm'
     directory: '/server'
@@ -21,3 +27,11 @@ updates:
         versions: ['<6.15.2']
       - dependency-name: '@babel/core'
         versions: ['<7.29.6']
+      - dependency-name: 'express'
+        versions: ['>=5.0.0']
+      - dependency-name: 'jest'
+        versions: ['>=30.0.0']
+      - dependency-name: 'dotenv'
+        versions: ['>=17.0.0']
+      - dependency-name: 'bcryptjs'
+        versions: ['>=3.0.0']
