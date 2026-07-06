@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from '../context/AuthContext';
 import { SubscriptionProvider } from '../context/SubscriptionContext';
 import { ToastProvider } from '../context/ToastContext';
+import { Analytics } from '@vercel/analytics/react';
 import useScrollToTop from '../hooks/useScrollToTop';
 import ToastContainer from '../components/ui/Toast';
 
@@ -35,6 +36,7 @@ function App() {
         <ToastProvider>
           <Router>
             <ScrollToTop />
+            <Analytics />
             <Routes>
               <Route path="/" element={<Home />} />
               <Route
