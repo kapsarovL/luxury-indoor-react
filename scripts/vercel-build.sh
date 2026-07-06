@@ -56,15 +56,9 @@ cat > "$OUT/config.json" << 'EOF'
 {
   "version": 3,
   "routes": [
+    { "src": "^/api/(.*)$", "dest": "/api/index" },
     { "handle": "filesystem" },
-    {
-      "src": "^/((?!api/|_vercel/|.*\\..*))$",
-      "dest": "/index.html",
-      "check": true
-    },
-    {
-      "handle": "miss"
-    }
+    { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
 EOF
