@@ -19,6 +19,10 @@ updates:
         versions: ['>=17.0.0']
       - dependency-name: '@eslint/js'
         versions: ['>=10.0.0']
+      - dependency-name: '@types/react-dom'
+        versions: ['>=19.0.0']
+      - dependency-name: 'react-dom'
+        versions: ['>=19.0.0']
 
   - package-ecosystem: 'npm'
     directory: '/server'
